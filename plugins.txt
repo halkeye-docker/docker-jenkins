@@ -1,0 +1,16 @@
+blueocean
+blueocean-github-pipeline
+credentials
+docker-build-publish
+docker-build-step
+docker-slaves
+favorite
+github-branch-source
+google-login
+google-oauth-plugin
+greenballs
+github-pullrequest
+github-autostatus
+github-oauth
+html5-notifier-plugin
+matrix-auth

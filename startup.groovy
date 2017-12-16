@@ -22,8 +22,6 @@ if (githubClientId.exists() && githubClientSecret.exists()) {
       githubClientSecret.text.trim(),
       "read:org,user:email")
 
-  github_realm.createAccount('halkeye',NULL)
-
   //check for equality, no need to modify the runtime if no settings changed
   instance.setSecurityRealm(github_realm)
   instance.save()

@@ -22,7 +22,7 @@ def projects = [
 
 projects.each { slug ->
     String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
-    prinln("Creating " + slug);
+    println("Creating " + slug);
     WorkflowMultiBranchProject mbp = Jenkins.instance.createProject(WorkflowMultiBranchProject.class, id)
     mbp.displayName = slug
     GitHubSCMSource source = new GitHubSCMSource(slug.tokenize("/")[0], slug.tokenize("/")[1]);

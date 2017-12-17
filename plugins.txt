@@ -1,6 +1,7 @@
 blueocean
 blueocean-github-pipeline
 credentials
+cloudbees-folder
 docker-build-publish
 docker-build-step
 docker-slaves

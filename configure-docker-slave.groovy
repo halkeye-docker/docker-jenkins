@@ -7,7 +7,9 @@ import com.nirima.jenkins.plugins.docker.DockerTemplate;
 import com.nirima.jenkins.plugins.docker.DockerTemplateBase;
 import io.jenkins.docker.connector.DockerComputerConnector;
 
-DockerTemplateBase dockerTemplateBase = new DockerTemplateBase("jenkins/ssh-slave")
+
+DockerTemplateBase dockerTemplateBase = new DockerTemplateBase("tehranian/dind-jenkins-slave");
+dockerTemplateBase.setVolumesString("/var/run/docker.sock:/var/run/docker.sock")
 DockerTemplate dockerTemplate = new DockerTemplate(
     dockerTemplateBase,
     new DockerComputerAttachConnector(),

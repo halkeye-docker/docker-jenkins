@@ -22,20 +22,20 @@ Examples:
 /run/secrets/credentials/string
 /run/secrets/credentials/string/hipchat-gavinmogan
 /run/secrets/credentials/string/hipchat-gavinmogan/username
-/run/secrets/credentials/usernameColonPassword
-/run/secrets/credentials/usernameColonPassword/dockerhub-halkeye
-/run/secrets/credentials/usernameColonPassword/dockerhub-halkeye/password
-/run/secrets/credentials/usernameColonPassword/dockerhub-halkeye/username
-/run/secrets/credentials/usernameColonPassword/github-halkeye
-/run/secrets/credentials/usernameColonPassword/github-halkeye/password
-/run/secrets/credentials/usernameColonPassword/github-halkeye/username
-/run/secrets/credentials/usernameColonPassword/halkeye_quay
-/run/secrets/credentials/usernameColonPassword/halkeye_quay/password
-/run/secrets/credentials/usernameColonPassword/halkeye_quay/username
+/run/secrets/credentials/usernamePassword
+/run/secrets/credentials/usernamePassword/dockerhub-halkeye
+/run/secrets/credentials/usernamePassword/dockerhub-halkeye/password
+/run/secrets/credentials/usernamePassword/dockerhub-halkeye/username
+/run/secrets/credentials/usernamePassword/github-halkeye
+/run/secrets/credentials/usernamePassword/github-halkeye/password
+/run/secrets/credentials/usernamePassword/github-halkeye/username
+/run/secrets/credentials/usernamePassword/halkeye_quay
+/run/secrets/credentials/usernamePassword/halkeye_quay/password
+/run/secrets/credentials/usernamePassword/halkeye_quay/username
 
 */
 
-def usernamePasswordDir = new File("/run/secrets/credentials/usernameColonPassword")
+def usernamePasswordDir = new File("/run/secrets/credentials/usernamePassword")
 if (usernamePasswordDir.exists()) {
   println("Adding Username Credentials")
   usernamePasswordDir.eachFile(FileType.DIRECTORIES) { file -> 
@@ -45,8 +45,8 @@ if (usernamePasswordDir.exists()) {
       CredentialsScope.GLOBAL, 
       id, 
       "description:"+id, 
-      new File("/run/secrets/credentials/usernameColonPassword/" + id + "/username").text.trim(),
-      new File("/run/secrets/credentials/usernameColonPassword/" + id + "/password").text.trim(),
+      new File("/run/secrets/credentials/usernamePassword/" + id + "/username").text.trim(),
+      new File("/run/secrets/credentials/usernamePassword/" + id + "/password").text.trim(),
     )
     SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
   }

@@ -8,7 +8,7 @@ import com.nirima.jenkins.plugins.docker.DockerTemplateBase;
 import io.jenkins.docker.connector.DockerComputerConnector;
 
 
-DockerTemplateBase dockerTemplateBase = new DockerTemplateBase("tehranian/dind-jenkins-slave");
+DockerTemplateBase dockerTemplateBase = new DockerTemplateBase("halkeye/jenkins-slave");
 dockerTemplateBase.setVolumesString("/var/run/docker.sock:/var/run/docker.sock")
 DockerTemplate dockerTemplate = new DockerTemplate(
     dockerTemplateBase,
@@ -29,4 +29,5 @@ def clouds = [new DockerCloud(
     ),
     [dockerTemplate]
 )] as ArrayList
+
 Jenkins.getInstance().clouds.replaceBy(clouds)

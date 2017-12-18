@@ -1,6 +1,6 @@
-FROM jenkins/jenkins:latest
+FROM jenkins/jenkins:2.96
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-RUN echo 2.7.1 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
-RUN echo 2.7.1 > /usr/share/jenkins/ref/jenkins.install.InstallUtil.lastExecVersion
+RUN echo 2.96 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+RUN echo 2.96 > /usr/share/jenkins/ref/jenkins.install.InstallUtil.lastExecVersion
 COPY *.groovy /usr/share/jenkins/ref/init.groovy.d/

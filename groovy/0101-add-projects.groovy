@@ -12,7 +12,7 @@ import org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait;
 //import hudson.security.AuthorizationMatrixProperty;
 //import com.coravy.hudson.plugins.github.GithubProjectProperty;
 
-def projects = [
+def githubProjects = [
     'halkeye/bamboohr-employee-stats',
     'halkeye/codacy-maven-plugin',
     'halkeye/docker-mineos',
@@ -38,7 +38,7 @@ def projects = [
     // 'halkeye/ecmproject',
 ]
 
-projects.each { slug ->
+githubProjects.each { slug ->
     String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
     println("Creating " + slug);
     WorkflowMultiBranchProject mbp = Jenkins.instance.createProject(WorkflowMultiBranchProject.class, id)

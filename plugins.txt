@@ -4,11 +4,10 @@ credentials
 cloudbees-folder
 docker-build-publish
 docker-build-step
+docker-plugin
 docker-slaves
 favorite
 github-branch-source
-google-login
-google-oauth-plugin
 greenballs
 github-pullrequest
 github-autostatus

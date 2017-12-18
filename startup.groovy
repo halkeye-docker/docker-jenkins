@@ -25,6 +25,8 @@ if (githubClientId.exists() && githubClientSecret.exists()) {
   //check for equality, no need to modify the runtime if no settings changed
   instance.setSecurityRealm(github_realm)
   instance.save()
+} else {
+  return
 }
 
 println("Setting up authorization stategy")

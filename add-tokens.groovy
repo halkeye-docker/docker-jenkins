@@ -7,6 +7,7 @@ import com.cloudbees.plugins.credentials.*;
 import com.cloudbees.plugins.credentials.domains.*;
 import com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey;
 import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl;
+import org.jenkinsci.plugins.docker.commons.credentials.DockerServerCredentials;
 
 /*
 
@@ -69,7 +70,7 @@ if (stringDir.exists()) {
 
 def sshUserPrivateKeyDir = new File("/run/secrets/credentials/sshUserPrivateKey")
 if (sshUserPrivateKeyDir.exists()) {
-  println("Adding String Credentials")
+  println("Adding sshUserPrivateKey Credentials")
   sshUserPrivateKeyDir.eachFile(FileType.DIRECTORIES) { file -> 
     String id = FilenameUtils.getBaseName(file.name).toString();
     println("Handling: " + id)
@@ -84,3 +85,23 @@ if (sshUserPrivateKeyDir.exists()) {
     SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
   }
 }
+
+def dockerServerCredentialsDir = new File("/run/secrets/credentials/dockerServerCredentials")
+if (dockerServerCredentialsDir.exists()) {
+  println("Adding dockerServerCredentials Credentials")
+  dockerServerCredentialsDir.eachFile(FileType.DIRECTORIES) { file -> 
+    String id = FilenameUtils.getBaseName(file.name).toString();
+    println("Handling: " + id)
+    def c = new DockerServerCredentials (
+      CredentialsScope.GLOBAL, 
+      id,
+      "description:"+id,
+      new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/key.pem").text.trim(),
+      new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/cert.pem").text.trim(),
+      new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/ca.pem").text.trim(),
+    )
+    SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+  }
+}
+
+org.jenkinsci.plugins.docker.commons.credentials.DockerServerCredentials

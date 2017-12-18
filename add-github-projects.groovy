@@ -1,4 +1,5 @@
 import jenkins.model.Jenkins;
+import hudson.model.Item.*;
 import com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy;
 import jenkins.branch.BranchSource;
 import jenkins.branch.MultiBranchProject;
@@ -8,6 +9,8 @@ import org.jenkinsci.plugins.github_branch_source.GitHubSCMSource;
 import org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait;
+//import hudson.security.AuthorizationMatrixProperty;
+//import com.coravy.hudson.plugins.github.GithubProjectProperty;
 
 def projects = [
     'halkeye/gavinmogan.com',
@@ -32,6 +35,11 @@ projects.each { slug ->
         new OriginPullRequestDiscoveryTrait(1),
         new ForkPullRequestDiscoveryTrait(1, new ForkPullRequestDiscoveryTrait.TrustContributors())
     ])
+    /*
+    // public project should be allowed to be read by anyone
+    mbp.addProperty(new AuthorizationMatrixProperty([(hudson.model.Item.READ): ["authenticated"]]));
+    mbp.addProperty(new GithubProjectProperty("https://github.com/" + slug));
+    */
     mbp.getSourcesList().add(new BranchSource(source));
     mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
 }

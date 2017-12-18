@@ -13,14 +13,29 @@ import org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait;
 //import com.coravy.hudson.plugins.github.GithubProjectProperty;
 
 def projects = [
-    'halkeye/gavinmogan.com',
-    'halkeye/minecraft.gavinmogan.com',
+    'halkeye/bamboohr-employee-stats',
+    'halkeye/codacy-maven-plugin',
     'halkeye/docker-mineos',
-    'halkeye/jenkins-docker',
-    'halkeye/go_windows_stats',
     'halkeye/docker-starbound',
+    'halkeye/flask_atlassian_connect',
+    'halkeye/gavinmogan.com',
+    'halkeye/get_groups',
+    'halkeye/git-version-commits',
+    'halkeye/go_windows_stats',
+    'halkeye/halkeye-ansible',
+    'halkeye/http_bouncer_client',
+    'halkeye/http_bouncer_server',
+    'halkeye/hubot-jenkins-notifier',
+    'halkeye/infinicatr',
+    'halkeye/jenkins-docker',
+    'halkeye/jenkins-slave-docker',
+    'halkeye/minecraft.gavinmogan.com',
+    'halkeye/proxy-s3-google-oauth',
+    'halkeye/react-book-reader',
+    'halkeye/release-dashboard',
+    'halkeye/slack-confluence',
     'halkeye/slack-foodee',
-    'halkeye/slack-confluence'
+    // 'halkeye/ecmproject',
 ]
 
 projects.each { slug ->

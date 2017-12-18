@@ -8,6 +8,7 @@ import com.cloudbees.plugins.credentials.domains.*;
 import com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey;
 import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl;
 import org.jenkinsci.plugins.docker.commons.credentials.DockerServerCredentials;
+import hudson.plugins.sauce_ondemand.credentials.SauceCredentials;
 
 /*
 
@@ -51,6 +52,22 @@ if (usernamePasswordDir.exists()) {
   }
 }
 
+def sauceDir = new File("/run/secrets/credentials/saucelabs")
+if (sauceDir.exists()) {
+  println("Adding Sauce Labs Credentials")
+  sauceDir.eachFile(FileType.DIRECTORIES) { file -> 
+    String id = FilenameUtils.getBaseName(file.name).toString();
+    println("Handling: " + id)
+    def c = new SauceCredentials(
+      CredentialsScope.GLOBAL, 
+      id, 
+      new File("/run/secrets/credentials/saucelabs/" + id + "/username").text.trim(),
+      new File("/run/secrets/credentials/saucelabs/" + id + "/password").text.trim(),
+      "description:"+id
+    )
+    SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+  }
+}
 def stringDir = new File("/run/secrets/credentials/string")
 if (stringDir.exists()) {
   println("Adding String Credentials")
@@ -103,5 +120,3 @@ if (dockerServerCredentialsDir.exists()) {
     SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
   }
 }
-
-org.jenkinsci.plugins.docker.commons.credentials.DockerServerCredentials

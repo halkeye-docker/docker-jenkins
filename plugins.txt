@@ -14,3 +14,4 @@ github-autostatus
 github-oauth
 html5-notifier-plugin
 matrix-auth
+sauce-ondemand

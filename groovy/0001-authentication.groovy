@@ -32,8 +32,6 @@ if (githubClientId.exists() && githubClientSecret.exists()) {
 println("Setting up authorization stategy")
 def strategy = new hudson.security.ProjectMatrixAuthorizationStrategy()
 
-// Roles based on https://wiki.jenkins-ci.org/display/JENKINS/Matrix-based+security
-//Overall - http://javadoc.jenkins-ci.org/jenkins/model/Jenkins.html
 strategy.add(Jenkins.ADMINISTER, 'halkeye')
 strategy.add(Jenkins.RUN_SCRIPTS, 'halkeye')
 strategy.add(Jenkins.READ, 'halkeye')
@@ -42,13 +40,8 @@ strategy.add(Jenkins.ADMINISTER, 'halkeye')
 strategy.add(Jenkins.RUN_SCRIPTS, 'halkeye')
 strategy.add(Jenkins.READ, 'halkeye')
 
-
-// root# grep anonymous /local/jenkins/config.xml
-strategy.add(Jenkins.READ, 'anonymous')
-//strategy.add(hudson.model.Item.READ, 'anonymous')
-//strategy.add(hudson.model.View.READ, 'anonymous')
-
-
+strategy.add(Jenkins.READ, 'authenticated')
+strategy.add(hudson.model.Item.DISCOVER, 'anonymous')
 
 // Agent (Slave < 2.0) - http://javadoc.jenkins-ci.org/jenkins/model/Jenkins.MasterComputer.html
 strategy.add(Jenkins.MasterComputer.BUILD, 'halkeye')
@@ -57,7 +50,6 @@ strategy.add(Jenkins.MasterComputer.CONNECT, 'halkeye')
 strategy.add(Jenkins.MasterComputer.CREATE, 'halkeye')
 strategy.add(Jenkins.MasterComputer.DELETE, 'halkeye')
 strategy.add(Jenkins.MasterComputer.DISCONNECT, 'halkeye')
-
 
 // Job - http://javadoc.jenkins-ci.org/hudson/model/Item.html
 strategy.add(hudson.model.Item.BUILD, 'halkeye')
@@ -71,12 +63,10 @@ strategy.add(hudson.model.Item.READ, 'halkeye')
 strategy.add(hudson.model.Item.WIPEOUT, 'halkeye')
 strategy.add(hudson.model.Item.WORKSPACE, 'halkeye')
 
-
 // Run - http://javadoc.jenkins-ci.org/hudson/model/Run.html
 strategy.add(hudson.model.Run.DELETE, 'halkeye')
 strategy.add(hudson.model.Run.UPDATE, 'halkeye')
 strategy.add(hudson.model.Run.ARTIFACTS, 'halkeye')
-
 
 // View - http://javadoc.jenkins-ci.org/hudson/model/View.html
 strategy.add(hudson.model.View.CONFIGURE, 'halkeye')
@@ -84,10 +74,8 @@ strategy.add(hudson.model.View.CREATE, 'halkeye')
 strategy.add(hudson.model.View.DELETE, 'halkeye')
 strategy.add(hudson.model.View.READ, 'halkeye')
 
-
 // SCM - http://javadoc.jenkins-ci.org/hudson/model/View.html
 strategy.add(hudson.scm.SCM.TAG, 'halkeye')
-
 
 // Credentials - https://github.com/jenkinsci/credentials-plugin/blob/master/src/main/java/com/cloudbees/plugins/credentials/CredentialsProvider.java
 strategy.add(CredentialsProvider.CREATE, "halkeye")
@@ -95,7 +83,6 @@ strategy.add(CredentialsProvider.UPDATE, "halkeye")
 strategy.add(CredentialsProvider.VIEW, "halkeye")
 strategy.add(CredentialsProvider.DELETE, "halkeye")
 strategy.add(CredentialsProvider.MANAGE_DOMAINS, "halkeye")
-
 
 // Plugin Manager http://javadoc.jenkins-ci.org/hudson/PluginManager.html
 strategy.add(hudson.PluginManager.UPLOAD_PLUGINS, 'halkeye')

@@ -6,6 +6,7 @@ import jenkins.branch.MultiBranchProject;
 import jenkins.plugins.git.GitSCMSource;
 import org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMSource;
+import com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource;
 import org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait;
@@ -38,13 +39,46 @@ def githubProjects = [
     // 'halkeye/ecmproject',
 ]
 
+def bitbucketProjects = [
+    'halkeye/hpmud',
+    'halkeye/ingrid_intimidator',
+    'halkeye/love-notes-app',
+    'halkeye/loves-notes-api',
+    'halkeye/presentation-devops',
+    'halkeye/presentation-linux101',
+    'halkeye/presentation-react-vs-angular',
+    'halkeye/presentation-stats',
+    'saltystories/stories',
+]
+
 githubProjects.each { slug ->
     String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
-    println("Creating " + slug);
+    println("Creating - Github Project - " + slug);
     WorkflowMultiBranchProject mbp = Jenkins.instance.createProject(WorkflowMultiBranchProject.class, id)
-    mbp.displayName = slug
+    mbp.displayName = "Github: " + slug
     GitHubSCMSource source = new GitHubSCMSource(slug.tokenize("/")[0], slug.tokenize("/")[1]);
     source.setCredentialsId('github-halkeye');
+    source.setTraits([
+        new BranchDiscoveryTrait(1),
+        new OriginPullRequestDiscoveryTrait(1),
+        new ForkPullRequestDiscoveryTrait(1, new ForkPullRequestDiscoveryTrait.TrustContributors())
+    ])
+    /*
+    // public project should be allowed to be read by anyone
+    mbp.addProperty(new AuthorizationMatrixProperty([(hudson.model.Item.READ): ["authenticated"]]));
+    mbp.addProperty(new GithubProjectProperty("https://github.com/" + slug));
+    */
+    mbp.getSourcesList().add(new BranchSource(source));
+    mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
+}
+
+bitbucketProjects.each { slug ->
+    String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
+    println("Creating - Bitbucket Project - " + slug);
+    WorkflowMultiBranchProject mbp = Jenkins.instance.createProject(WorkflowMultiBranchProject.class, id)
+    mbp.displayName = "Bitbucket: " + slug
+    BitbucketSCMSource source = new BitbucketSCMSource(slug.tokenize("/")[0], slug.tokenize("/")[1]);
+    source.setCredentialsId('bitbucket-halkeye');
     source.setTraits([
         new BranchDiscoveryTrait(1),
         new OriginPullRequestDiscoveryTrait(1),

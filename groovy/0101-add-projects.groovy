@@ -75,7 +75,11 @@ githubProjects.each { slug ->
     */
     BranchSource branchSource = new BranchSource(source);
     branchSource.setStrategy(new DefaultBranchPropertyStrategy([
-        new org.jenkinsci.plugins.GithubProjectBranchProperty("https://github.com/" + slug)
+        new org.jenkinsci.plugins.GithubProjectBranchProperty("https://github.com/" + slug),
+        new org.jenkinsci.plugins.AuthorizationMatrixBranchProperty([
+            (Jenkins.READ): ['nfg', 'aliaoca'],
+            (hudson.model.Item.READ): ['nfg', 'aliaoca']
+        ])
     ] as BranchProperty[]));
     mbp.getSourcesList().add(branchSource);
     mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));

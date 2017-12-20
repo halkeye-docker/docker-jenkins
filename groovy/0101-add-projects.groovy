@@ -1,6 +1,7 @@
 import jenkins.model.Jenkins;
 import hudson.model.Item.*;
 import com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy;
+import hudson.security.ProjectMatrixAuthorizationStrategy;
 import jenkins.branch.BranchSource;
 import jenkins.branch.MultiBranchProject;
 import jenkins.branch.DefaultBranchPropertyStrategy;
@@ -12,6 +13,9 @@ import com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource;
 import org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait;
+
+import com.cloudbees.hudson.plugins.folder.Folder;
+import com.cloudbees.hudson.plugins.folder.properties.AuthorizationMatrixProperty;
 //import hudson.security.AuthorizationMatrixProperty;
 //import com.coravy.hudson.plugins.github.GithubProjectProperty;
 
@@ -54,10 +58,23 @@ def bitbucketProjects = [
     'saltystories/stories',
 ]
 
+def githubFolder = new Folder(Jenkins.instance, "Github Projects");
+if (Jenkins.getInstance().getAuthorizationStrategy() instanceof ProjectMatrixAuthorizationStrategy) {
+    githubFolder.addProperty(new AuthorizationMatrixProperty([
+                (Jenkins.READ): ['nfg', 'aliaoca', 'authorized'],
+                (hudson.model.Item.READ): ['nfg', 'aliaoca', 'authorized'],
+                (hudson.model.Item.DISCOVER): ['nfg', 'aliaoca', 'authorized']
+            ]));
+}
+Jenkins.instance.putItem(githubFolder);
+
+def bitbucketFolder = new Folder(Jenkins.instance, "Bitbucket Projects");
+Jenkins.instance.putItem(bitbucketFolder);
+
 githubProjects.each { slug ->
     String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
     println("Creating - Github Project - " + slug);
-    WorkflowMultiBranchProject mbp = Jenkins.instance.createProject(WorkflowMultiBranchProject.class, id)
+    WorkflowMultiBranchProject mbp = githubFolder.createProject(WorkflowMultiBranchProject.class, id)
     mbp.displayName = "Github: " + slug
     GitHubSCMSource source = new GitHubSCMSource(slug.tokenize("/")[0], slug.tokenize("/")[1]);
     source.setCredentialsId('github-halkeye');
@@ -66,18 +83,9 @@ githubProjects.each { slug ->
         new OriginPullRequestDiscoveryTrait(1),
         new ForkPullRequestDiscoveryTrait(1, new ForkPullRequestDiscoveryTrait.TrustContributors())
     ])
-    /*
-    // public project should be allowed to be read by anyone
-    mbp.addProperty(new AuthorizationMatrixProperty([(hudson.model.Item.READ): ["authenticated"]]));
-    mbp.addProperty(new GithubProjectProperty("https://github.com/" + slug));
-    */
     BranchSource branchSource = new BranchSource(source);
     branchSource.setStrategy(new DefaultBranchPropertyStrategy([
         new org.jenkinsci.plugins.GithubProjectBranchProperty("https://github.com/" + slug),
-        new org.jenkinsci.plugins.AuthorizationMatrixBranchProperty([
-            (Jenkins.READ): ['nfg', 'aliaoca'],
-            (hudson.model.Item.READ): ['nfg', 'aliaoca']
-        ])
     ] as BranchProperty[]));
     mbp.getSourcesList().add(branchSource);
     mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
@@ -86,7 +94,7 @@ githubProjects.each { slug ->
 bitbucketProjects.each { slug ->
     String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
     println("Creating - Bitbucket Project - " + slug);
-    WorkflowMultiBranchProject mbp = Jenkins.instance.createProject(WorkflowMultiBranchProject.class, id)
+    WorkflowMultiBranchProject mbp = bitbucketFolder.createProject(WorkflowMultiBranchProject.class, id)
     mbp.displayName = "Bitbucket: " + slug
     BitbucketSCMSource source = new BitbucketSCMSource(slug.tokenize("/")[0], slug.tokenize("/")[1]);
     source.setCredentialsId('bitbucket-halkeye');
@@ -95,11 +103,6 @@ bitbucketProjects.each { slug ->
         new OriginPullRequestDiscoveryTrait(1),
         new ForkPullRequestDiscoveryTrait(1, new ForkPullRequestDiscoveryTrait.TrustContributors())
     ])
-    /*
-    // public project should be allowed to be read by anyone
-    mbp.addProperty(new AuthorizationMatrixProperty([(hudson.model.Item.READ): ["authenticated"]]));
-    mbp.addProperty(new GithubProjectProperty("https://github.com/" + slug));
-    */
     mbp.getSourcesList().add(new BranchSource(source));
     mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
 }

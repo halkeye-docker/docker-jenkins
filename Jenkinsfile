@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker --no-cache build -t halkeye/jenkins-docker .'
+                sh 'docker build -t halkeye/jenkins-docker --no-cache .'
             }
         }
 

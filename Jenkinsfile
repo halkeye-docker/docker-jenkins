@@ -10,16 +10,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t halkeye/jenkins-docker .'
+                sh 'docker --no-cache build -t halkeye/jenkins-docker .'
             }
         }
-        
+
         stage('Deploy') {
             when {
                 branch 'master'
             }
-            environment { 
-                DOCKER = credentials('dockerhub-halkeye') 
+            environment {
+                DOCKER = credentials('dockerhub-halkeye')
             }
             steps {
                 sh 'docker login --username $DOCKER_USR --password=$DOCKER_PSW'

@@ -5,11 +5,12 @@ import org.jenkinsci.plugins.docker.commons.credentials.DockerServerEndpoint;
 import com.nirima.jenkins.plugins.docker.DockerCloud;
 import com.nirima.jenkins.plugins.docker.DockerTemplate;
 import com.nirima.jenkins.plugins.docker.DockerTemplateBase;
-import io.jenkins.docker.connector.DockerComputerConnector;
 
 
-DockerTemplateBase dockerTemplateBase = new DockerTemplateBase("halkeye/jenkins-slave");
-dockerTemplateBase.setVolumesString("/var/run/docker.sock:/var/run/docker.sock")
+DockerTemplateBase dockerTemplateBase = new DockerTemplateBase("halkeye/dind-jenkins-slave");
+dockerTemplateBase.setPrivileged(true);
+dockerTemplateBase.setTty(true);
+
 DockerTemplate dockerTemplate = new DockerTemplate(
     dockerTemplateBase,
     new DockerComputerAttachConnector(),

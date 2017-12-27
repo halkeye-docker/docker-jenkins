@@ -36,6 +36,7 @@ def githubProjects = [
     'halkeye/hubot-jenkins-notifier',
     'halkeye/hubot-brain-redis-hash',
     'halkeye/hubot-regex',
+    'halkeye/hubot-url-describer',
     'halkeye/infinicatr',
     'halkeye/jenkins-slave-docker',
     'halkeye/minecraft.gavinmogan.com',

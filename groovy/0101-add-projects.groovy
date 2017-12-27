@@ -34,6 +34,8 @@ def githubProjects = [
     'halkeye/http_bouncer_client',
     'halkeye/http_bouncer_server',
     'halkeye/hubot-jenkins-notifier',
+    'halkeye/hubot-brain-redis-hash',
+    'halkeye/hubot-regex',
     'halkeye/infinicatr',
     'halkeye/jenkins-slave-docker',
     'halkeye/minecraft.gavinmogan.com',

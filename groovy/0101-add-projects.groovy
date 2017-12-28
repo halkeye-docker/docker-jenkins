@@ -22,6 +22,7 @@ import com.cloudbees.hudson.plugins.folder.properties.AuthorizationMatrixPropert
 def githubProjects = [
     'halkeye/bamboohr-employee-stats',
     'halkeye/codacy-maven-plugin',
+    'halkeye/dehydrated-docker',
     'halkeye/dind-jenkins-slave',
     'halkeye/docker-mineos',
     'halkeye/docker-starbound',

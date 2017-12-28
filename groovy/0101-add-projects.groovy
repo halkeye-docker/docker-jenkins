@@ -34,6 +34,7 @@ def githubProjects = [
     'halkeye/halkeye-ansible',
     'halkeye/http_bouncer_client',
     'halkeye/http_bouncer_server',
+    'halkeye/hubot-confluence-search',
     'halkeye/hubot-jenkins-notifier',
     'halkeye/hubot-brain-redis-hash',
     'halkeye/hubot-regex',

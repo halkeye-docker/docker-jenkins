@@ -40,7 +40,7 @@ def githubProjects = [
     'halkeye/hubot-regex',
     'halkeye/hubot-url-describer',
     'halkeye/infinicatr',
-    'halkeye/jenkins-slave-docker',
+    'halkeye/jenkins-docker',
     'halkeye/minecraft.gavinmogan.com',
     'halkeye/proxy-s3-google-oauth',
     'halkeye/react-book-reader',

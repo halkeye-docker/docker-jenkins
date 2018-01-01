@@ -8,6 +8,7 @@ docker-build-publish
 docker-build-step
 docker-plugin
 docker-slaves
+email-ext
 favorite
 github-autostatus
 github-branch-source

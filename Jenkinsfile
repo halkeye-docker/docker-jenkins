@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t halkeye/jenkins-docker --no-cache .'
+                sh 'docker build -t halkeye/jenkins --no-cache .'
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
             }
             steps {
                 sh 'docker login --username $DOCKER_USR --password=$DOCKER_PSW'
-                // sh 'docker push halkeye/jenkins-docker'
+                sh 'docker push halkeye/jenkins'
             }
         }
     }

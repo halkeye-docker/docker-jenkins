@@ -10,7 +10,7 @@ import com.nirima.jenkins.plugins.docker.DockerTemplateBase;
 DockerTemplateBase dockerTemplateBase = new DockerTemplateBase("halkeye/dind-jenkins-slave");
 dockerTemplateBase.setPrivileged(true);
 dockerTemplateBase.setTty(true);
-dockerTemplateBase.setVolumesString("/var/lib/docker:/var/lib/docker\n/var/run/docker.sock:/var/run/docker.sock")
+// dockerTemplateBase.setVolumesString("/var/lib/docker:/var/lib/docker\n/var/run/docker.sock:/var/run/docker.sock")
 
 DockerTemplate dockerTemplate = new DockerTemplate(
     dockerTemplateBase,
@@ -19,6 +19,7 @@ DockerTemplate dockerTemplate = new DockerTemplate(
     "/home/jenkins", /* remoteFs */
     "2147483647" /* instanceCapStr */
 )
+dockerTemplate.setRemoveVolumes(false);
 
 println('Configuring docker cloud')
 def clouds = [new DockerCloud(

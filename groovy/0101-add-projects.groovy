@@ -38,6 +38,7 @@ def githubProjects = [
     'halkeye/hubot-confluence-search',
     'halkeye/hubot-jenkins-notifier',
     'halkeye/hubot-regex',
+    'halkeye/hubot-sonarr',
     'halkeye/hubot-url-describer',
     'halkeye/infinicatr',
     'halkeye/jenkins-docker',

@@ -1,6 +1,8 @@
 ansicolor
 blueocean
 blueocean-github-pipeline
+bitbucket-approve
+bitbucket-pullrequest-builder
 cloudbees-bitbucket-branch-source
 cloudbees-folder
 credentials
@@ -10,6 +12,7 @@ docker-plugin
 docker-slaves
 email-ext
 favorite
+ghprb
 github-autostatus
 github-branch-source
 github-oauth

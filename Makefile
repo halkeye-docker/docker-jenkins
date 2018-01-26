@@ -1,2 +1,2 @@
 all:
-	docker build -t halkeye/jenkins .
+	docker build -t halkeye/jenkins:latest .

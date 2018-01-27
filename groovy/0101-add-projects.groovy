@@ -26,6 +26,7 @@ def githubProjects = [
     'halkeye/dind-jenkins-slave',
     'halkeye/docker-mineos',
     'halkeye/docker-node-red',
+    'halkeye/docker-pi-hole',
     'halkeye/docker-starbound',
     'halkeye/flask_atlassian_connect',
     'halkeye/gavinmogan.com',

@@ -8,6 +8,7 @@ import com.cloudbees.plugins.credentials.domains.*;
 import com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey;
 import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl;
 import org.jenkinsci.plugins.docker.commons.credentials.DockerServerCredentials;
+import com.uber.jenkins.phabricator.credentials.ConduitCredentialsImpl;
 import hudson.plugins.sauce_ondemand.credentials.SauceCredentials;
 
 /*
@@ -116,6 +117,23 @@ if (dockerServerCredentialsDir.exists()) {
       new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/key.pem").text.trim(),
       new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/cert.pem").text.trim(),
       new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/ca.pem").text.trim(),
+    )
+    SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+  }
+}
+
+def condiutCredentialsDir = new File("/run/secrets/credentials/condiutCredentials")
+if (condiutCredentialsDir.exists()) {
+  println("Adding condiutCredentials Credentials")
+  condiutCredentialsDir.eachFile(FileType.DIRECTORIES) { file ->
+    String id = FilenameUtils.getBaseName(file.name).toString();
+    println("Handling: " + id)
+    def c = new ConduitCredentialsImpl(
+        id,
+        new File("/run/secrets/credentials/condiutCredentials/" + id + "/username").text.trim() /* url */,
+        '' /* gateway */,
+        "description:"+id,
+        new File("/run/secrets/credentials/condiutCredentials/" + id + "/password").text.trim(),
     )
     SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
   }

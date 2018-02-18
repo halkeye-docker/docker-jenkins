@@ -1,8 +1,8 @@
 ansicolor
-blueocean
-blueocean-github-pipeline
 bitbucket-approve
 bitbucket-pullrequest-builder
+blueocean
+blueocean-github-pipeline
 cloudbees-bitbucket-branch-source
 cloudbees-folder
 credentials
@@ -20,4 +20,5 @@ github-pullrequest
 greenballs
 html5-notifier-plugin
 matrix-auth
+phabricator-plugin
 sauce-ondemand

@@ -50,6 +50,7 @@ def githubProjects = [
     'halkeye/release-dashboard',
     'halkeye/slack-confluence',
     'halkeye/slack-foodee',
+    'halkeye/soundboard',
 
     // 'halkeye/ecmproject',
 ]

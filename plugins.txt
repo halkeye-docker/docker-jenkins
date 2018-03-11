@@ -5,6 +5,7 @@ blueocean
 blueocean-github-pipeline
 cloudbees-bitbucket-branch-source
 cloudbees-folder
+codeclimate-plugin
 credentials
 docker-build-publish
 docker-build-step
@@ -16,6 +17,8 @@ ghprb
 github-autostatus
 github-branch-source
 github-oauth
+github-pr-comment-build
+github-pr-coverage-status
 github-pullrequest
 greenballs
 html5-notifier-plugin

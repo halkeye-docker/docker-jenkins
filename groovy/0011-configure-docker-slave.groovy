@@ -19,7 +19,7 @@ DockerTemplate dockerTemplate = new DockerTemplate(
     "/home/jenkins", /* remoteFs */
     "2147483647" /* instanceCapStr */
 )
-dockerTemplate.setRemoveVolumes(false);
+dockerTemplate.setRemoveVolumes(true);
 
 println('Configuring docker cloud')
 def clouds = [new DockerCloud(

@@ -24,6 +24,7 @@ def githubProjects = [
     'halkeye/codacy-maven-plugin',
     'halkeye/dehydrated-docker',
     'halkeye/dind-jenkins-slave',
+    'halkeye/docker-dnscrypt-2',
     'halkeye/docker-mineos',
     'halkeye/docker-node-red',
     'halkeye/docker-pi-hole',

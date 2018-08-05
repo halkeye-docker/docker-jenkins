@@ -117,3 +117,22 @@ bitbucketProjects.each { slug ->
     mbp.getSourcesList().add(new BranchSource(source));
     mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
 }
+
+def systemFolder = new Folder(Jenkins.instance, "System Projects");
+Jenkins.instance.putItem(systemFolder);
+
+if (1) {
+  String slug = "halkeye/jenkins-docker";
+  String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
+  println("Creating - System Projects - " + slug);
+
+  WorkflowJob j = systemFolder.createProject(WorkflowJob.class, id);
+  j.setDefinition(new CpsFlowDefinition("" +
+      "node {\n" +
+      "  git credentialsId: 'github-halkeye', url: 'git@github.com:halkeye/jenkins-docker.git'\n" +
+      "  load 'groovy/0101-add-projects.groovy' }\n" +
+      "}"
+  ));
+  flowDefinition.displayName = "System: " + slug
+  flowDefinition.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
+}

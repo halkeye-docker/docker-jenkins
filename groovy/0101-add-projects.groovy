@@ -1,5 +1,6 @@
 import jenkins.model.Jenkins;
 import hudson.model.Item.*;
+import hudson.tasks.LogRotator;
 import com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy;
 import hudson.security.ProjectMatrixAuthorizationStrategy;
 import jenkins.branch.BranchSource;
@@ -16,6 +17,8 @@ import org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrai
 import org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait;
 import org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition;
 import org.jenkinsci.plugins.workflow.job.WorkflowJob;
+import org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty;
+import com.cloudbees.jenkins.GitHubPushTrigger;
 
 import com.cloudbees.hudson.plugins.folder.Folder;
 import com.cloudbees.hudson.plugins.folder.properties.AuthorizationMatrixProperty;
@@ -134,10 +137,14 @@ if (1) {
   j.setDefinition(
 		new CpsScmFlowDefinition(
 			new GitStep("https://github.com/halkeye/jenkins-docker.git").createSCM(), 
-			"Jenkinsfile.loaddeps"
+			"Jenkinsfile.loadjobs"
 		)
 	);
 
-  flowDefinition.displayName = "System: " + slug
-  flowDefinition.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
+  j.displayName = "System: " + slug
+  j.properties.add(new hudson.tasks.LogRotator(0, 5));
+  PipelineTriggersJobProperty ptjp = new PipelineTriggersJobProperty();
+  ptjp.addTrigger(new GitHubPushTrigger());
+  j.properties.add(ptjp);
+
 }

@@ -7,12 +7,15 @@ import jenkins.branch.MultiBranchProject;
 import jenkins.branch.DefaultBranchPropertyStrategy;
 import jenkins.branch.BranchProperty;
 import jenkins.plugins.git.GitSCMSource;
+import jenkins.plugins.git.GitStep;
 import org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMSource;
 import com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource;
 import org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait;
+import org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition;
+import org.jenkinsci.plugins.workflow.job.WorkflowJob;
 
 import com.cloudbees.hudson.plugins.folder.Folder;
 import com.cloudbees.hudson.plugins.folder.properties.AuthorizationMatrixProperty;
@@ -127,12 +130,13 @@ if (1) {
   println("Creating - System Projects - " + slug);
 
   WorkflowJob j = systemFolder.createProject(WorkflowJob.class, id);
-  j.setDefinition(new CpsFlowDefinition("" +
-      "node {\n" +
-      "  git credentialsId: 'github-halkeye', url: 'git@github.com:halkeye/jenkins-docker.git'\n" +
-      "  load 'groovy/0101-add-projects.groovy' }\n" +
-      "}"
-  ));
+  j.setDefinition(
+		new CpsScmFlowDefinition(
+			new GitStep("https://github.com/halkeye/jenkins-docker.git").createSCM(), 
+			"Jenkinsfile.loaddeps"
+		)
+	);
+
   flowDefinition.displayName = "System: " + slug
   flowDefinition.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
 }

@@ -136,8 +136,8 @@ if (1) {
   WorkflowJob j = systemFolder.createProject(WorkflowJob.class, id);
   j.setDefinition(
 		new CpsScmFlowDefinition(
-			new GitStep("https://github.com/halkeye/jenkins-docker.git").createSCM(), 
-			"Jenkinsfile.loadjobs"
+			new GitStep("git@github.com:halkeye/jenkins-docker.git").createSCM(), 
+			"Jenkinsfile.loaddeps"
 		)
 	);
 

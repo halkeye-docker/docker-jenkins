@@ -79,9 +79,9 @@ def bitbucketProjects = [
 def githubFolder = new Folder(Jenkins.instance, "Github Projects");
 if (Jenkins.instance.getAuthorizationStrategy() instanceof ProjectMatrixAuthorizationStrategy) {
     githubFolder.addProperty(new AuthorizationMatrixProperty([
-                (Jenkins.READ): ['nfg', 'aliaoca', 'authorized'],
-                (hudson.model.Item.READ): ['nfg', 'aliaoca', 'authorized'],
-                (hudson.model.Item.DISCOVER): ['nfg', 'aliaoca', 'authorized']
+                (Jenkins.READ): ['nfg', 'aliaoca', 'authorized', 'authenticated'],
+                (hudson.model.Item.READ): ['nfg', 'aliaoca', 'authorized', 'authenticated'],
+                (hudson.model.Item.DISCOVER): ['nfg', 'aliaoca', 'authorized', 'authenticated']
             ]));
 }
 Jenkins.instance.putItem(githubFolder);

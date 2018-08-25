@@ -13,7 +13,6 @@ docker-plugin
 docker-slaves
 email-ext
 favorite
-ghprb
 github-autostatus
 github-branch-source
 github-oauth

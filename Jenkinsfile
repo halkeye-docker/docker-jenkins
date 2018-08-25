@@ -1,3 +1,5 @@
+def response = httpRequest 'https://updates.jenkins.io/stable/latestCore.txt'
+
 properties([[$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/halkeye/jenkins-docker/']])
 
 pipeline {
@@ -10,7 +12,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t halkeye/jenkins --no-cache .'
+                dir('jenkins-docker') {
+                    sh """
+                    docker build \
+                       -t halkeye/jenkins:${response.content} \
+                       --build-arg JENKINS_VERSION=${response.content} \
+                       --no-cache .
+                    """
+                }
             }
         }
 
@@ -22,8 +31,12 @@ pipeline {
                 DOCKER = credentials('dockerhub-halkeye')
             }
             steps {
-                sh 'docker login --username $DOCKER_USR --password=$DOCKER_PSW'
-                sh 'docker push halkeye/jenkins'
+                sh """
+                  docker login --username $DOCKER_USR --password=$DOCKER_PSW quay.io
+                  docker push halkeye/jenkins:${response.content}
+                  docker tag halkeye/jenkins:${response.content} halkeye/jenkins:latest
+                  docker push halkeye/jenkins:latest
+                """
             }
         }
     }

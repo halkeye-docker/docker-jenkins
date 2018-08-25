@@ -22,6 +22,8 @@ github-pr-coverage-status
 github-pullrequest
 greenballs
 html5-notifier-plugin
+http_request
+jdk-tool
 matrix-auth
 phabricator-plugin
 sauce-ondemand

@@ -31,6 +31,7 @@ def githubProjects = [
     'halkeye/dehydrated-docker',
     'halkeye/dind-jenkins-slave',
     'halkeye/docker-dnscrypt-2',
+    'halkeye/docker-jenkins',
     'halkeye/docker-mineos',
     'halkeye/docker-nextcloud',
     'halkeye/docker-node-red',
@@ -51,7 +52,6 @@ def githubProjects = [
     'halkeye/hubot-sonarr',
     'halkeye/hubot-url-describer',
     'halkeye/infinicatr',
-    'halkeye/jenkins-docker',
     'halkeye/minecraft.gavinmogan.com',
     'halkeye/proxy-s3-google-oauth',
     'halkeye/react-book-reader',
@@ -99,12 +99,10 @@ githubProjects.each { slug ->
     source.setTraits([
         new BranchDiscoveryTrait(1),
         new OriginPullRequestDiscoveryTrait(1),
-        new ForkPullRequestDiscoveryTrait(1, new ForkPullRequestDiscoveryTrait.TrustContributors())
+        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission())
     ])
     BranchSource branchSource = new BranchSource(source);
-    branchSource.setStrategy(new DefaultBranchPropertyStrategy([
-        new org.jenkinsci.plugins.GithubProjectBranchProperty("https://github.com/" + slug),
-    ] as BranchProperty[]));
+    branchSource.setStrategy(new DefaultBranchPropertyStrategy([] as BranchProperty[]));
     mbp.getSourcesList().add(branchSource);
     mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
 }

@@ -12,14 +12,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('jenkins-docker') {
-                    sh """
-                    docker build \
-                       -t halkeye/jenkins:${response.content} \
-                       --build-arg JENKINS_VERSION=${response.content} \
-                       --no-cache .
-                    """
-                }
+                sh """
+                docker build \
+                    -t halkeye/jenkins:${response.content} \
+                    --build-arg JENKINS_VERSION=${response.content} \
+                    --no-cache .
+                """
             }
         }
 

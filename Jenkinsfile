@@ -30,7 +30,7 @@ pipeline {
             }
             steps {
                 sh """
-                  docker login --username $DOCKER_USR --password=$DOCKER_PSW quay.io
+                  docker login --username $DOCKER_USR --password=$DOCKER_PSW
                   docker push halkeye/jenkins:${response.content}
                   docker tag halkeye/jenkins:${response.content} halkeye/jenkins:latest
                   docker push halkeye/jenkins:latest

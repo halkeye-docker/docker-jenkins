@@ -7,9 +7,6 @@ import com.cloudbees.plugins.credentials.*;
 import com.cloudbees.plugins.credentials.domains.*;
 import com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey;
 import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl;
-import org.jenkinsci.plugins.docker.commons.credentials.DockerServerCredentials;
-import com.uber.jenkins.phabricator.credentials.ConduitCredentialsImpl;
-import hudson.plugins.sauce_ondemand.credentials.SauceCredentials;
 
 /*
 
@@ -36,6 +33,14 @@ Examples:
 
 */
 
+Class getClassByName(String clazz) {
+  try {
+    return Class.forName(clazz);
+  } catch (ClassNotFoundException e) {
+    return null;
+  }
+}
+
 def usernamePasswordDir = new File("/run/secrets/credentials/usernamePassword")
 if (usernamePasswordDir.exists()) {
   println("Adding Username Credentials")
@@ -53,22 +58,6 @@ if (usernamePasswordDir.exists()) {
   }
 }
 
-def sauceDir = new File("/run/secrets/credentials/saucelabs")
-if (sauceDir.exists()) {
-  println("Adding Sauce Labs Credentials")
-  sauceDir.eachFile(FileType.DIRECTORIES) { file -> 
-    String id = FilenameUtils.getBaseName(file.name).toString();
-    println("Handling: " + id)
-    def c = new SauceCredentials(
-      CredentialsScope.GLOBAL, 
-      id, 
-      new File("/run/secrets/credentials/saucelabs/" + id + "/username").text.trim(),
-      new File("/run/secrets/credentials/saucelabs/" + id + "/password").text.trim(),
-      "description:"+id
-    )
-    SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
-  }
-}
 def stringDir = new File("/run/secrets/credentials/string")
 if (stringDir.exists()) {
   println("Adding String Credentials")
@@ -96,7 +85,7 @@ if (sshUserPrivateKeyDir.exists()) {
       CredentialsScope.GLOBAL, 
       id, 
       new File("/run/secrets/credentials/sshUserPrivateKey/" + id + "/username").text.trim(),
-      new BasicSSHUserPrivateKey.FileOnMasterPrivateKeySource("/run/secrets/credentials/sshUserPrivateKey/" + id + "/secretKey"),
+      new BasicSSHUserPrivateKey.DirectEntryPrivateKeySource(new File("/run/secrets/credentials/sshUserPrivateKey/" + id + "/secretKey").text.trim()),
       new File("/run/secrets/credentials/sshUserPrivateKey/" + id + "/password").text.trim(),
       "description:"+id, 
     )
@@ -104,37 +93,93 @@ if (sshUserPrivateKeyDir.exists()) {
   }
 }
 
+def sauceDir = new File("/run/secrets/credentials/saucelabs")
+if (sauceDir.exists()) {
+  Class clazz = getClassByName("hudson.plugins.sauce_ondemand.credentials.SauceCredentials");
+  if (clazz != null) {
+    println("Adding Sauce Labs Credentials")
+    sauceDir.eachFile(FileType.DIRECTORIES) { file -> 
+      String id = FilenameUtils.getBaseName(file.name).toString();
+      println("Handling: " + id)
+      def c = clazz.newInstance(
+        CredentialsScope.GLOBAL, 
+        id, 
+        new File("/run/secrets/credentials/saucelabs/" + id + "/username").text.trim(),
+        new File("/run/secrets/credentials/saucelabs/" + id + "/password").text.trim(),
+        "description:"+id
+      )
+      SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+    }
+   } else {
+    println("[ERROR] SauceCredentials not found, did you load the right plugin")
+  }
+}
+
 def dockerServerCredentialsDir = new File("/run/secrets/credentials/dockerServerCredentials")
 if (dockerServerCredentialsDir.exists()) {
-  println("Adding dockerServerCredentials Credentials")
-  dockerServerCredentialsDir.eachFile(FileType.DIRECTORIES) { file -> 
-    String id = FilenameUtils.getBaseName(file.name).toString();
-    println("Handling: " + id)
-    def c = new DockerServerCredentials (
-      CredentialsScope.GLOBAL, 
-      id,
-      "description:"+id,
-      new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/key.pem").text.trim(),
-      new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/cert.pem").text.trim(),
-      new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/ca.pem").text.trim(),
-    )
-    SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+  Class clazz = getClassByName("org.jenkinsci.plugins.docker.commons.credentials.DockerServerCredentials");
+  if (clazz != null) {
+    println("Adding dockerServerCredentials Credentials")
+    dockerServerCredentialsDir.eachFile(FileType.DIRECTORIES) { file -> 
+      String id = FilenameUtils.getBaseName(file.name).toString();
+      println("Handling: " + id)
+      def c = clazz.newInstance(
+        CredentialsScope.GLOBAL, 
+        id,
+        "description:"+id,
+        new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/key.pem").text.trim(),
+        new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/cert.pem").text.trim(),
+        new File("/run/secrets/credentials/dockerServerCredentials/" + id + "/ca.pem").text.trim(),
+      )
+      SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+    }
+  } else {
+    println("[ERROR] DockerServerCredentials not found, did you load the right plugin")
   }
 }
 
 def condiutCredentialsDir = new File("/run/secrets/credentials/condiutCredentials")
 if (condiutCredentialsDir.exists()) {
-  println("Adding condiutCredentials Credentials")
-  condiutCredentialsDir.eachFile(FileType.DIRECTORIES) { file ->
-    String id = FilenameUtils.getBaseName(file.name).toString();
-    println("Handling: " + id)
-    def c = new ConduitCredentialsImpl(
-        id,
-        new File("/run/secrets/credentials/condiutCredentials/" + id + "/username").text.trim() /* url */,
-        '' /* gateway */,
+  Class clazz = getClassByName("com.uber.jenkins.phabricator.credentials.ConduitCredentialsImpl");
+  if (clazz != null) {
+    println("Adding condiutCredentials Credentials")
+    condiutCredentialsDir.eachFile(FileType.DIRECTORIES) { file ->
+      String id = FilenameUtils.getBaseName(file.name).toString();
+      println("Handling: " + id)
+      def c = clazz.newInstance(
+          id,
+          new File("/run/secrets/credentials/condiutCredentials/" + id + "/username").text.trim() /* url */,
+          '' /* gateway */,
+          "description:"+id,
+          new File("/run/secrets/credentials/condiutCredentials/" + id + "/password").text.trim(),
+      )
+      SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+    }
+  } else {
+    println("[ERROR] ConduitCredentialsImpl not found, did you load the right plugin")
+  }
+}
+
+def AWSCredentialsDir = new File("/run/secrets/credentials/awsCredentials")
+if (AWSCredentialsDir.exists()) {
+  Class clazz = getClassByName("com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl");
+  if (clazz != null) {  
+    println("Adding AWSCredentials Credentials")
+    AWSCredentialsDir.eachFile(FileType.DIRECTORIES) { file -> 
+      String id = FilenameUtils.getBaseName(file.name).toString();
+      println("Handling: " + id)
+      def c = clazz.newInstance(
+        CredentialsScope.GLOBAL, 
+        id, 
+        new File("/run/secrets/credentials/awsCredentials/" + id + "/accessKeyID").text.trim(),
+        new File("/run/secrets/credentials/awsCredentials/" + id + "/secretAccessKey").text.trim(),
         "description:"+id,
-        new File("/run/secrets/credentials/condiutCredentials/" + id + "/password").text.trim(),
-    )
-    SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+        "",
+        ""
+      )
+      SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), c)
+    }
+  } else {
+    println("[ERROR] AWSCredentialsClass not found, did you load the right plugin")
   }
 }

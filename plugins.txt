@@ -26,3 +26,4 @@ jdk-tool
 matrix-auth
 phabricator-plugin
 sauce-ondemand
+warnings-ng

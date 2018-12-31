@@ -27,7 +27,6 @@ import com.cloudbees.hudson.plugins.folder.properties.AuthorizationMatrixPropert
 
 def githubProjects = [
     'halkeye/bamboohr-employee-stats',
-    'halkeye/graphite_scripts',
     'halkeye/codacy-maven-plugin',
     'halkeye/dehydrated-docker',
     'halkeye/dind-jenkins-slave',
@@ -43,6 +42,7 @@ def githubProjects = [
     'halkeye/get_groups',
     'halkeye/git-version-commits',
     'halkeye/go_windows_stats',
+    'halkeye/graphite_scripts',
     'halkeye/halkeye-ansible',
     'halkeye/http_bouncer_client',
     'halkeye/http_bouncer_server',
@@ -59,6 +59,7 @@ def githubProjects = [
     'halkeye/react-book-reader',
     'halkeye/release-dashboard',
     'halkeye/slack-confluence',
+    'halkeye/thelounge-chart',
     'halkeye/slack-foodee',
     'halkeye/soundboard',
     'halkeye/www-gavinmogan-com',

@@ -6,6 +6,7 @@ blueocean-github-pipeline
 cloudbees-bitbucket-branch-source
 cloudbees-folder
 codeclimate-plugin
+configuration-as-code
 credentials
 docker-build-publish
 docker-build-step

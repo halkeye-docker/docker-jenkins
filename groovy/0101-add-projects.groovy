@@ -59,9 +59,10 @@ def githubProjects = [
     'halkeye/react-book-reader',
     'halkeye/release-dashboard',
     'halkeye/slack-confluence',
-    'halkeye/thelounge-chart',
     'halkeye/slack-foodee',
     'halkeye/soundboard',
+    'halkeye/thelounge-chart',
+    'halkeye/turtl-chart',
     'halkeye/www-gavinmogan-com',
 
     // 'halkeye/ecmproject',

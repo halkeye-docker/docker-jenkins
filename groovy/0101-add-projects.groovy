@@ -54,6 +54,7 @@ def githubProjects = [
     'halkeye/hubot-url-describer',
     'halkeye/infinicatr',
     'halkeye/minecraft.gavinmogan.com',
+    'halkeye/nzbhydra2-chart',
     'halkeye/pgadmin-chart',
     'halkeye/proxy-s3-google-oauth',
     'halkeye/react-book-reader',

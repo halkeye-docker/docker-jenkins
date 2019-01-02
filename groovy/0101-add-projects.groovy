@@ -53,6 +53,7 @@ def githubProjects = [
     'halkeye/hubot-sonarr',
     'halkeye/hubot-url-describer',
     'halkeye/infinicatr',
+    'halkeye/jackett-chart',
     'halkeye/minecraft.gavinmogan.com',
     'halkeye/nzbhydra2-chart',
     'halkeye/pgadmin-chart',

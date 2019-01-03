@@ -64,6 +64,7 @@ def githubProjects = [
     'halkeye/slack-foodee',
     'halkeye/soundboard',
     'halkeye/thelounge-chart',
+    'halkeye/traefik-forward-auth-chart',
     'halkeye/turtl-chart',
     'halkeye/www-gavinmogan-com',
 

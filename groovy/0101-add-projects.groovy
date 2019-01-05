@@ -22,13 +22,14 @@ import com.cloudbees.jenkins.GitHubPushTrigger;
 
 import com.cloudbees.hudson.plugins.folder.Folder;
 import com.cloudbees.hudson.plugins.folder.properties.AuthorizationMatrixProperty;
-//import hudson.security.AuthorizationMatrixProperty;
-//import com.coravy.hudson.plugins.github.GithubProjectProperty;
+
+import jenkins.branch.OrganizationFolder;
+import jenkins.branch.NoTriggerOrganizationFolderProperty;
+import org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator;
 
 def githubProjects = [
     'halkeye/bamboohr-employee-stats',
     'halkeye/codacy-maven-plugin',
-    'halkeye/dehydrated-docker',
     'halkeye/dind-jenkins-slave',
     'halkeye/docker-dnscrypt-2',
     'halkeye/docker-jenkins',
@@ -53,23 +54,19 @@ def githubProjects = [
     'halkeye/hubot-sonarr',
     'halkeye/hubot-url-describer',
     'halkeye/infinicatr',
-    'halkeye/jackett-chart',
     'halkeye/minecraft.gavinmogan.com',
-    'halkeye/nzbhydra2-chart',
-    'halkeye/pgadmin-chart',
     'halkeye/proxy-s3-google-oauth',
     'halkeye/react-book-reader',
     'halkeye/release-dashboard',
     'halkeye/slack-confluence',
     'halkeye/slack-foodee',
     'halkeye/soundboard',
-    'halkeye/thelounge-chart',
-    'halkeye/traefik-forward-auth-chart',
-    'halkeye/turtl-chart',
     'halkeye/www-gavinmogan-com',
-
-    // 'halkeye/ecmproject',
 ]
+
+def githubOrganizations = [
+    'halkeye-helm-charts'
+];
 
 def bitbucketProjects = [
     'halkeye/hpmud',
@@ -83,18 +80,26 @@ def bitbucketProjects = [
     'saltystories/stories',
 ]
 
+def allowedGithubUsers = ['nfg', 'aliaoca', 'authorized', 'authenticated'];
 def githubFolder = new Folder(Jenkins.instance, "Github Projects");
-if (Jenkins.instance.getAuthorizationStrategy() instanceof ProjectMatrixAuthorizationStrategy) {
-    githubFolder.addProperty(new AuthorizationMatrixProperty([
-                (Jenkins.READ): ['nfg', 'aliaoca', 'authorized', 'authenticated'],
-                (hudson.model.Item.READ): ['nfg', 'aliaoca', 'authorized', 'authenticated'],
-                (hudson.model.Item.DISCOVER): ['nfg', 'aliaoca', 'authorized', 'authenticated']
-            ]));
-}
 Jenkins.instance.putItem(githubFolder);
-
+def githubOrganizationsFolder = new Folder(Jenkins.instance, "Github Organization Projects");
+Jenkins.instance.putItem(githubOrganizationsFolder);
 def bitbucketFolder = new Folder(Jenkins.instance, "Bitbucket Projects");
 Jenkins.instance.putItem(bitbucketFolder);
+
+if (Jenkins.instance.getAuthorizationStrategy() instanceof ProjectMatrixAuthorizationStrategy) {
+    githubFolder.addProperty(new AuthorizationMatrixProperty([
+                (Jenkins.READ): allowedGithubUsers,
+                (hudson.model.Item.READ): allowedGithubUsers,
+                (hudson.model.Item.DISCOVER): allowedGithubUsers
+            ]));
+    githubOrganizationsFolder.addProperty(new AuthorizationMatrixProperty([
+                (Jenkins.READ): allowedGithubUsers,
+                (hudson.model.Item.READ): allowedGithubUsers,
+                (hudson.model.Item.DISCOVER): allowedGithubUsers
+            ]));
+}
 
 githubProjects.each { slug ->
     String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
@@ -130,26 +135,33 @@ bitbucketProjects.each { slug ->
     mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
 }
 
-def systemFolder = new Folder(Jenkins.instance, "System Projects");
-Jenkins.instance.putItem(systemFolder);
+githubOrganizations.each { slug ->
+    String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
+    println("Creating - Github Organization Project - " + slug);
+    jenkins.branch.OrganizationFolder of = githubOrganizationsFolder.createProject(jenkins.branch.OrganizationFolder.class, id)
+    of.displayName = "Github Org: " + slug
+    // of.onCreatedFromScratch();
+    of.addProperty(new jenkins.branch.NoTriggerOrganizationFolderProperty('.*'));
+    of.addProperty(new org.jenkinsci.plugins.pipeline.modeldefinition.config.FolderConfig());
+    of.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
+    org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator scmNav = new org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator(slug);
+    scmNav.setCredentialsId('github-halkeye');
+    scmNav.setTraits([
+        new BranchDiscoveryTrait(1),
+        new OriginPullRequestDiscoveryTrait(1),
+        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission())
+    ]);
+    of.getNavigators().add(scmNav);
 
-if (1) {
-  String slug = "halkeye/jenkins-docker";
-  String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
-  println("Creating - System Projects - " + slug);
 
-  WorkflowJob j = systemFolder.createProject(WorkflowJob.class, id);
-  j.setDefinition(
-		new CpsScmFlowDefinition(
-			new GitStep("git@github.com:halkeye/jenkins-docker.git").createSCM(), 
-			"Jenkinsfile.loaddeps"
-		)
-	);
-
-  j.displayName = "System: " + slug
-  j.properties.add(new hudson.tasks.LogRotator(0, 5));
-  PipelineTriggersJobProperty ptjp = new PipelineTriggersJobProperty();
-  ptjp.addTrigger(new GitHubPushTrigger());
-  j.properties.add(ptjp);
-
+/*
+  <projectFactories>
+    <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory plugin="workflow-multibranch@2.20">
+      <scriptPath>Jenkinsfile</scriptPath>
+    </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory>
+  </projectFactories>
+  <buildStrategies>
+    <com.github.kostyasha.github.integration.multibranch.GitHubBranchBuildStrategy plugin="github-pullrequest@0.2.4"/>
+  </buildStrategies>
+  */
 }

@@ -58,6 +58,7 @@ def githubProjects = [
 
 def githubDockerProjects = [
     'halkeye/dind-jenkins-slave',
+    'halkeye/discorse-docker-builder',
     'halkeye/docker-dnscrypt-2',
     'halkeye/docker-jenkins',
     'halkeye/docker-mineos',

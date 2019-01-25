@@ -50,7 +50,6 @@ def githubProjects = [
     'halkeye/proxy-s3-google-oauth',
     'halkeye/react-book-reader',
     'halkeye/release-dashboard',
-    'halkeye/slack-confluence',
     'halkeye/slack-foodee',
     'halkeye/soundboard',
     'halkeye/www-gavinmogan-com',

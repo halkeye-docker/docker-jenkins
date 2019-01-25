@@ -132,7 +132,7 @@ githubProjects.each { slug ->
 githubDockerProjects.each { slug ->
     String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
     println("Creating - Github Project - " + slug);
-    WorkflowMultiBranchProject mbp = githubFolder.createProject(WorkflowMultiBranchProject.class, id)
+    WorkflowMultiBranchProject mbp = githubDockerFolder.createProject(WorkflowMultiBranchProject.class, id)
     mbp.displayName = "Github: " + slug
     GitHubSCMSource source = new GitHubSCMSource(slug.tokenize("/")[0], slug.tokenize("/")[1]);
     source.setCredentialsId('github-halkeye');

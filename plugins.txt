@@ -27,6 +27,6 @@ http_request
 jdk-tool
 matrix-auth
 phabricator-plugin
-pipeline-utility-steps-plugin
+pipeline-utility-steps
 sauce-ondemand
 warnings-ng

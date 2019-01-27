@@ -169,7 +169,6 @@ githubOrganizations.each { slug ->
     jenkins.branch.OrganizationFolder of = githubOrganizationsFolder.createProject(jenkins.branch.OrganizationFolder.class, id)
     of.displayName = "Github Org: " + slug
     // of.onCreatedFromScratch();
-    of.addProperty(new jenkins.branch.NoTriggerOrganizationFolderProperty('.*'));
     of.addProperty(new org.jenkinsci.plugins.pipeline.modeldefinition.config.FolderConfig());
     of.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
     org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator scmNav = new org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator(slug);
@@ -180,16 +179,4 @@ githubOrganizations.each { slug ->
         new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission())
     ]);
     of.getNavigators().add(scmNav);
-
-
-/*
-  <projectFactories>
-    <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory plugin="workflow-multibranch@2.20">
-      <scriptPath>Jenkinsfile</scriptPath>
-    </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory>
-  </projectFactories>
-  <buildStrategies>
-    <com.github.kostyasha.github.integration.multibranch.GitHubBranchBuildStrategy plugin="github-pullrequest@0.2.4"/>
-  </buildStrategies>
-  */
 }

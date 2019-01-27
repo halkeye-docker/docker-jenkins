@@ -1,41 +1,4 @@
-jenkins:
-  agentProtocols:
-    - "JNLP4-connect"
-    - "Ping"
-  clouds:
-    - docker:
-        dockerApi:
-          dockerHost:
-            credentialsId: "docker-localhost"
-            uri: "unix:///var/run/docker.sock"
-        name: "docker"
-        templates:
-          - dockerTemplateBase:
-              image: "halkeye/dind-jenkins-slave"
-              privileged: true
-              tty: true
-            labelString: "docker-slave"
-            remoteFs: "/home/jenkins"
-            removeVolumes: true
-  crumbIssuer:
-    standard:
-      excludeClientIPFromCrumb: true
-  disableRememberMe: true
-  mode: NORMAL
-  numExecutors: 0
-  primaryView:
-    all:
-      name: "all"
-  quietPeriod: 5
-  scmCheckoutRetryCount: 0
-  slaveAgentPort: 50000
-  views:
-    - all:
-        name: "all"
-security:
-  gitHubPluginConfig:
-    configs:
-      - credentialsId: "github-admin-halkeye"
+unclassified:
   globalLibraries:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"
@@ -47,10 +10,3 @@ security:
                 id: "0c50aafe-86b4-42f5-a54e-cbda5e3d3a7b"
                 repoOwner: "halkeye"
                 repository: "jenkins-shared-library"
-                traits:
-                  - branchDiscoveryTrait:
-                      strategyId: 1
-                  - originPullRequestDiscoveryTrait:
-                      strategyId: 1
-                  - forkPullRequestDiscoveryTrait:
-                      strategyId: 1

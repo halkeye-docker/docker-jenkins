@@ -1,22 +1,22 @@
 jenkins:
   agentProtocols:
-  - "JNLP4-connect"
-  - "Ping"
+    - "JNLP4-connect"
+    - "Ping"
   clouds:
-  - docker:
-      dockerApi:
-        dockerHost:
-          credentialsId: "docker-localhost"
-          uri: "unix:///var/run/docker.sock"
-      name: "docker"
-      templates:
-      - dockerTemplateBase:
-          image: "halkeye/dind-jenkins-slave"
-          privileged: true
-          tty: true
-        labelString: "docker-slave"
-        remoteFs: "/home/jenkins"
-        removeVolumes: true
+    - docker:
+        dockerApi:
+          dockerHost:
+            credentialsId: "docker-localhost"
+            uri: "unix:///var/run/docker.sock"
+        name: "docker"
+        templates:
+          - dockerTemplateBase:
+              image: "halkeye/dind-jenkins-slave"
+              privileged: true
+              tty: true
+            labelString: "docker-slave"
+            remoteFs: "/home/jenkins"
+            removeVolumes: true
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: true
@@ -30,27 +30,27 @@ jenkins:
   scmCheckoutRetryCount: 0
   slaveAgentPort: 50000
   views:
-  - all:
-      name: "all"
+    - all:
+        name: "all"
 security:
   gitHubPluginConfig:
     configs:
-    - credentialsId: "github-admin-halkeye"
+      - credentialsId: "github-admin-halkeye"
   globalLibraries:
     libraries:
-    - name: "halkeye-shared-library"
-      retriever:
-        modernSCM:
-          scm:
-            github:
-              credentialsId: "github-halkeye"
-              id: "0c50aafe-86b4-42f5-a54e-cbda5e3d3a7b"
-              repoOwner: "halkeye"
-              repository: "jenkins-shared-library"
-              traits:
-              - branchDiscoveryTrait:
-                  strategyId: 1
-              - originPullRequestDiscoveryTrait:
-                  strategyId: 1
-              - forkPullRequestDiscoveryTrait:
-                  strategyId: 1
+      - name: "github.com/halkeye/jenkins-shared-library"
+        retriever:
+          modernSCM:
+            scm:
+              github:
+                credentialsId: "github-halkeye"
+                id: "0c50aafe-86b4-42f5-a54e-cbda5e3d3a7b"
+                repoOwner: "halkeye"
+                repository: "jenkins-shared-library"
+                traits:
+                  - branchDiscoveryTrait:
+                      strategyId: 1
+                  - originPullRequestDiscoveryTrait:
+                      strategyId: 1
+                  - forkPullRequestDiscoveryTrait:
+                      strategyId: 1

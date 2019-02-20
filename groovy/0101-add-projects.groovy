@@ -37,6 +37,7 @@ def githubProjects = [
     'halkeye/go_windows_stats',
     'halkeye/graphite_scripts',
     'halkeye/halkeye-ansible',
+    'halkeye/helm-repo-html',
     'halkeye/http_bouncer_client',
     'halkeye/http_bouncer_server',
     'halkeye/hubot-brain-redis-hash',

@@ -13,6 +13,7 @@ import org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMSource;
 import com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource;
 import org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait;
+import org.jenkinsci.plugins.github_branch_source.TagDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait;
 import org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait;
 import org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition;
@@ -122,7 +123,8 @@ githubProjects.each { slug ->
     source.setTraits([
         new BranchDiscoveryTrait(1),
         new OriginPullRequestDiscoveryTrait(1),
-        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission())
+        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission()),
+        new TagDiscoveryTrait()
     ])
     BranchSource branchSource = new BranchSource(source);
     branchSource.setStrategy(new DefaultBranchPropertyStrategy([] as BranchProperty[]));
@@ -140,7 +142,8 @@ githubDockerProjects.each { slug ->
     source.setTraits([
         new BranchDiscoveryTrait(1),
         new OriginPullRequestDiscoveryTrait(1),
-        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission())
+        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission()),
+        new TagDiscoveryTrait()
     ])
     BranchSource branchSource = new BranchSource(source);
     branchSource.setStrategy(new DefaultBranchPropertyStrategy([] as BranchProperty[]));
@@ -158,7 +161,8 @@ bitbucketProjects.each { slug ->
     source.setTraits([
         new BranchDiscoveryTrait(1),
         new OriginPullRequestDiscoveryTrait(1),
-        new ForkPullRequestDiscoveryTrait(1, new ForkPullRequestDiscoveryTrait.TrustContributors())
+        new ForkPullRequestDiscoveryTrait(1, new ForkPullRequestDiscoveryTrait.TrustContributors()),
+        new TagDiscoveryTrait()
     ])
     mbp.getSourcesList().add(new BranchSource(source));
     mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
@@ -177,7 +181,8 @@ githubOrganizations.each { slug ->
     scmNav.setTraits([
         new BranchDiscoveryTrait(1),
         new OriginPullRequestDiscoveryTrait(1),
-        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission())
+        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission()),
+        new TagDiscoveryTrait()
     ]);
     of.getNavigators().add(scmNav);
 }

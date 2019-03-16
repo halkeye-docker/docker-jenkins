@@ -55,18 +55,8 @@ def githubProjects = [
     'halkeye/slack-foodee',
     'halkeye/soundboard',
     'halkeye/www-gavinmogan-com',
-];
 
-def githubDockerProjects = [
-    'halkeye/dind-jenkins-slave',
     'halkeye/discorse-docker-builder',
-    'halkeye/docker-dnscrypt-2',
-    'halkeye/docker-jenkins',
-    'halkeye/docker-mineos',
-    'halkeye/docker-nextcloud',
-    'halkeye/docker-node-red',
-    'halkeye/docker-pi-hole',
-    'halkeye/docker-starbound',
 ];
 
 def githubOrganizations = [
@@ -118,25 +108,6 @@ githubProjects.each { slug ->
     String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
     println("Creating - Github Project - " + slug);
     WorkflowMultiBranchProject mbp = githubFolder.createProject(WorkflowMultiBranchProject.class, id)
-    mbp.displayName = "Github: " + slug
-    GitHubSCMSource source = new GitHubSCMSource(slug.tokenize("/")[0], slug.tokenize("/")[1]);
-    source.setCredentialsId('github-halkeye');
-    source.setTraits([
-        new BranchDiscoveryTrait(1),
-        new OriginPullRequestDiscoveryTrait(1),
-        new ForkPullRequestDiscoveryTrait(1, new org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait.TrustPermission()),
-        new TagDiscoveryTrait()
-    ])
-    BranchSource branchSource = new BranchSource(source);
-    branchSource.setStrategy(new DefaultBranchPropertyStrategy([] as BranchProperty[]));
-    mbp.getSourcesList().add(branchSource);
-    mbp.setOrphanedItemStrategy(new DefaultOrphanedItemStrategy(true, 5, 5));
-}
-
-githubDockerProjects.each { slug ->
-    String id = slug.replaceAll(/[^a-zA-Z0-9_.-]/, '_');
-    println("Creating - Github Project - " + slug);
-    WorkflowMultiBranchProject mbp = githubDockerFolder.createProject(WorkflowMultiBranchProject.class, id)
     mbp.displayName = "Github: " + slug
     GitHubSCMSource source = new GitHubSCMSource(slug.tokenize("/")[0], slug.tokenize("/")[1]);
     source.setCredentialsId('github-halkeye');

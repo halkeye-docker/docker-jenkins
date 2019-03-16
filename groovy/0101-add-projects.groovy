@@ -70,7 +70,8 @@ def githubDockerProjects = [
 ];
 
 def githubOrganizations = [
-    'halkeye-helm-charts'
+    'halkeye-helm-charts',
+    'halkeye-docker'
 ];
 
 def bitbucketProjects = [

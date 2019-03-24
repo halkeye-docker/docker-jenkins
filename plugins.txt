@@ -8,6 +8,7 @@ cloudbees-bitbucket-branch-source
 cloudbees-folder
 codeclimate-plugin
 configuration-as-code
+configuration-as-code-support
 credentials
 docker-build-publish
 docker-build-step
@@ -25,6 +26,7 @@ greenballs
 html5-notifier-plugin
 http_request
 jdk-tool
+job-dsl-plugin
 lockable-resources
 matrix-auth
 phabricator-plugin

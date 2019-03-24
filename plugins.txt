@@ -26,7 +26,7 @@ greenballs
 html5-notifier-plugin
 http_request
 jdk-tool
-job-dsl-plugin
+job-dsl
 lockable-resources
 matrix-auth
 phabricator-plugin

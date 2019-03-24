@@ -1,3 +1,4 @@
+---
 unclassified:
   globalLibraries:
     libraries:
@@ -10,3 +11,101 @@ unclassified:
                 id: "0c50aafe-86b4-42f5-a54e-cbda5e3d3a7b"
                 repoOwner: "halkeye"
                 repository: "jenkins-shared-library"
+jobs:
+  - script: >
+      def githubProjects = new groovy.json.JsonSlurper().parse(
+        (new URL("https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/github_projects.json")).newReader()
+      );
+      def bitbucketProjects = new groovy.json.JsonSlurper().parse(
+        (new URL("https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/bitbucket_projects.json")).newReader()
+      );
+      def githubOrgs = new groovy.json.JsonSlurper().parse(
+        (new URL("https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/github_orgs.json")).newReader()
+      );
+
+      folder("github_projects") {
+        authorization {
+          ["nfg", "aliaoca", "authorized", "authenticated"].each { user ->
+            permission("hudson.model.Item.Read", user)
+            permission("hudson.model.Item.Discover", user)
+          }
+        }
+        displayName("Github Projects")
+        description("All the github projects")
+      }
+
+      folder("github_orgs") {
+        authorization {
+          ["nfg", "aliaoca", "authorized", "authenticated"].each { user ->
+            permission("hudson.model.Item.Read", user)
+            permission("hudson.model.Item.Discover", user)
+          }
+        }
+        displayName("Github Organization Projects")
+        description("")
+      }
+
+      folder("bitbucket_projects") {
+        displayName("Bitbucket Projects")
+        description("All the bitbucket projects")
+      }
+
+      githubProjects.keySet().each { username ->
+        githubProjects[username].each { slug ->
+          multibranchPipelineJob("github_projects/" + username + "_" + slug) {
+            branchSources {
+              github {
+                scanCredentialsId("github-halkeye")
+                repoOwner(username)
+                repository(slug)
+              }
+            }
+            orphanedItemStrategy {
+              discardOldItems {
+                numToKeep(5)
+              }
+            }
+          }
+        }
+      }
+
+      bitbucketProjects.keySet().each { username ->
+        bitbucketProjects[username].each { slug ->
+          multibranchPipelineJob("bitbucket_projects/" + username + "_" + slug) {           
+            configure {
+              it / sources / data / 'jenkins.branch.BranchSource' / source(class: 'com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource') {
+                credentialsId('bitbucket-halkeye')
+                repoOwner(username)
+                repository(slug)
+              }
+            }
+            orphanedItemStrategy {
+              discardOldItems {
+                numToKeep(5)
+              }
+            }
+          }
+        }
+      }
+
+      githubOrgs.each { slug ->
+        organizationFolder("github_orgs/" + slug) {
+          orphanedItemStrategy {
+            discardOldItems {
+              numToKeep(5)
+            }
+          }
+          organizations {
+            github {
+              repoOwner(slug)
+              buildForkPRMerge(true)
+              buildOriginBranch(true)
+              buildOriginBranchWithPR(true)
+              buildOriginPRHead(true)
+              buildOriginPRMerge(true)
+              credentialsId("github-halkeye")
+              scanCredentialsId("github-halkeye")
+            }
+          }
+        }
+      }

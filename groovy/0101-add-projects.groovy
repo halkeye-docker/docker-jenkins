@@ -28,6 +28,8 @@ import jenkins.branch.OrganizationFolder;
 import jenkins.branch.NoTriggerOrganizationFolderProperty;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator;
 
+return
+
 def githubProjects = [
     'halkeye/bamboohr-employee-stats',
     'halkeye/codacy-maven-plugin',

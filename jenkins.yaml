@@ -53,9 +53,9 @@ jobs:
       githubProjects.keySet().each { username ->
         githubProjects[username].each { slug ->
           multibranchPipelineJob("github_projects/" + username + "_" + slug) {
-            branchSources {
-              github {
-                scanCredentialsId("github-halkeye")
+            configure {
+              it / sources / data / 'jenkins.branch.BranchSource' / source(class: 'com.github.kostyasha.github.integration.multibranch.GitHubSCMSource') {
+                credentialsId("github-halkeye")
                 repoOwner(username)
                 repository(slug)
               }
@@ -71,7 +71,7 @@ jobs:
 
       bitbucketProjects.keySet().each { username ->
         bitbucketProjects[username].each { slug ->
-          multibranchPipelineJob("bitbucket_projects/" + username + "_" + slug) {           
+          multibranchPipelineJob("bitbucket_projects/" + username + "_" + slug) {
             configure {
               it / sources / data / 'jenkins.branch.BranchSource' / source(class: 'com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource') {
                 credentialsId('bitbucket-halkeye')

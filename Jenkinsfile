@@ -1,4 +1,5 @@
 def response = httpRequest 'https://updates.jenkins.io/stable/latestCore.txt'
+def version = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
 
 properties([[$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/halkeye/jenkins-docker/']])
 
@@ -14,7 +15,7 @@ pipeline {
             steps {
                 sh """
                 docker build \
-                    -t halkeye/jenkins:${response.content} \
+                    -t halkeye/jenkins:${version} \
                     --build-arg JENKINS_VERSION=${response.content} \
                     --no-cache .
                 """
@@ -31,8 +32,8 @@ pipeline {
             steps {
                 sh """
                   docker login --username $DOCKER_USR --password=$DOCKER_PSW
-                  docker push halkeye/jenkins:${response.content}
-                  docker tag halkeye/jenkins:${response.content} halkeye/jenkins:latest
+                  docker push halkeye/jenkins:${version}
+                  docker tag halkeye/jenkins:${version} halkeye/jenkins:latest
                   docker push halkeye/jenkins:latest
                 """
             }

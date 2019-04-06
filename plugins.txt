@@ -1,6 +1,5 @@
 ansicolor
 basic-branch-build-strategies
-bitbucket-approve
 bitbucket-pullrequest-builder
 blueocean
 blueocean-github-pipeline

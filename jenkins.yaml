@@ -6,11 +6,8 @@ unclassified:
         retriever:
           modernSCM:
             scm:
-              github:
-                credentialsId: "github-halkeye"
-                id: "0c50aafe-86b4-42f5-a54e-cbda5e3d3a7b"
-                repoOwner: "halkeye"
-                repository: "jenkins-shared-library"
+              git:
+                remote: "https://github.com/halkeye/jenkins-shared-library"
 jobs:
   - script: >
       def githubProjects = new groovy.json.JsonSlurper().parse(

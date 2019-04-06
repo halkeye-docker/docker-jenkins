@@ -68,7 +68,7 @@ jobs:
 
       bitbucketProjects.keySet().each { username ->
         bitbucketProjects[username].each { slug ->
-          multibranchPipelineJob("bitbucket_projects/" + username + "_" + slug) {           
+          multibranchPipelineJob("bitbucket_projects/" + username + "_" + slug) {
             configure {
               it / sources / data / 'jenkins.branch.BranchSource' / source(class: 'com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource') {
                 credentialsId('bitbucket-halkeye')

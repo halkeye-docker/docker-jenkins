@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh """
                 docker build \
-                    -t halkeye/jenkins:${version} \
+                    -t halkeye/jenkins:${response.content}_${version} \
                     --build-arg JENKINS_VERSION=${response.content} \
                     --no-cache .
                 """
@@ -32,8 +32,8 @@ pipeline {
             steps {
                 sh """
                   docker login --username $DOCKER_USR --password=$DOCKER_PSW
-                  docker push halkeye/jenkins:${version}
-                  docker tag halkeye/jenkins:${version} halkeye/jenkins:latest
+                  docker push halkeye/jenkins:${response.content}_${version}
+                  docker tag halkeye/jenkins:${response.content}_${version} halkeye/jenkins:latest
                   docker push halkeye/jenkins:latest
                 """
             }

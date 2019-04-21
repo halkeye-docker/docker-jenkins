@@ -1,5 +1,21 @@
 ---
 unclassified:
+  extendedEmailPublisher:
+    defaultReplyTo: "jenkins@gavinmogan.com"
+    smtpPort: "25"
+    smtpServer: "odin.kodekoan.com"
+  gitHubPluginConfig:
+    hookUrl: "https://jenkins.gavinmogan.com/github-webhook/"
+  githubPullRequests:
+    publishedURL: "https://jenkins.gavinmogan.com"
+  location:
+    adminAddress: "jenkins@gavinmogan.com"
+    url: "https://jenkins.gavinmogan.com/"
+  mailer:
+    adminAddress: "jenkins@gavinmogan.com"
+    replyToAddress: "jenkins@gavinmogan.com"
+    smtpHost: "odin.kodekoan.com"
+    smtpPort: "25"
   globalLibraries:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"

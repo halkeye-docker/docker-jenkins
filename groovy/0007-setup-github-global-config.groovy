@@ -5,7 +5,7 @@ import org.jenkinsci.plugins.github.config.GitHubServerConfig;
 
 JenkinsLocationConfiguration jenkinsLocationConfiguration = JenkinsLocationConfiguration.get()
 jenkinsLocationConfiguration.setUrl("https://jenkins.gavinmogan.com")
-jenkinsLocationConfiguration.setAdminAddress("gavin@saucelabs.com")
+jenkinsLocationConfiguration.setAdminAddress("jenkins@gavinmogan.com)
 jenkinsLocationConfiguration.save()
 
 GitHubPluginConfig pluginConfig = GitHubPlugin.configuration();

@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
                 sh """
-                  docker login --username $DOCKER_USR --password=$DOCKER_PSW
+                  echo "$DOCKER_PSW" | docker login --username $DOCKER_USR --password-stdin
                   docker push halkeye/jenkins:${response.content}_${version}
                   docker tag halkeye/jenkins:${response.content}_${version} halkeye/jenkins:latest
                   docker push halkeye/jenkins:latest

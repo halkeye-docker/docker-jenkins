@@ -31,4 +31,5 @@ matrix-auth
 phabricator-plugin
 pipeline-utility-steps
 sauce-ondemand
+sonar
 warnings-ng

@@ -16,6 +16,15 @@ unclassified:
     replyToAddress: "jenkins@gavinmogan.com"
     smtpHost: "odin.kodekoan.com"
     smtpPort: "25"
+  sonarGlobalConfiguration:
+    buildWrapperEnabled: true
+    installations:
+      - credentialsId: "sonarqube-g4v-halkeye"
+        name: "g4v"
+        serverUrl: "https://sonarqube.g4v.dev"
+        triggers:
+          skipScmCause: false
+          skipUpstreamCause: false
   globalLibraries:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"

@@ -41,7 +41,7 @@ tool:
           - installSource:
               installers:
                 - sonarRunnerInstaller:
-                  id: "3.3.0.1492"
+                    id: "3.3.0.1492"
 
 jobs:
   - script: >

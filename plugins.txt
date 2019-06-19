@@ -1,4 +1,5 @@
 ansicolor
+authorize-project
 basic-branch-build-strategies
 bitbucket-pullrequest-builder
 blueocean

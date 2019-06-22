@@ -1,4 +1,10 @@
 ---
+jenkins:
+  security:
+    queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: "anonymousAuthorizationStrategy"
 unclassified:
   extendedEmailPublisher:
     defaultReplyTo: "jenkins@gavinmogan.com"

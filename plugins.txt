@@ -2,8 +2,6 @@ ansicolor
 authorize-project
 basic-branch-build-strategies
 bitbucket-pullrequest-builder
-blueocean
-blueocean-github-pipeline
 cloudbees-bitbucket-branch-source
 cloudbees-folder
 codeclimate-plugin

@@ -1,9 +1,10 @@
 ---
+security:
+  queueItemAuthenticator:
+  authenticators:
+    - global:
+      strategy: "anonymousAuthorizationStrategy"
 jenkins:
-  #queueItemAuthenticator:
-  #  authenticators:
-  #    - global:
-  #      strategy: "anonymousAuthorizationStrategy"
   authorizationStrategy:
     projectMatrix:
       permissions:

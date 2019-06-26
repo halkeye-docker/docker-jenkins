@@ -1,17 +1,16 @@
 ---
 jenkins:
-  security:
-    queueItemAuthenticator:
-    authenticators:
-    - global:
-        strategy: "anonymousAuthorizationStrategy"
+  #queueItemAuthenticator:
+  #  authenticators:
+  #    - global:
+  #      strategy: "anonymousAuthorizationStrategy"
   authorizationStrategy:
     projectMatrix:
       permissions:
-      - "Agent/Build:anonymous"
-      - "Job/Discover:anonymous"
-      - "Overall/Administer:halkeye"
-      - "Overall/Read:authenticated"
+        - "Agent/Build:anonymous"
+        - "Job/Discover:anonymous"
+        - "Overall/Administer:halkeye"
+        - "Overall/Read:authenticated"
 unclassified:
   extendedEmailPublisher:
     defaultReplyTo: "jenkins@gavinmogan.com"

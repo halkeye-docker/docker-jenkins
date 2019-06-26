@@ -123,6 +123,9 @@ jobs:
                 strategyId 2
                 trust(class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustPermission')
               }
+              traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
+                strategyId 4
+              }
             }
             orphanedItemStrategy {
               discardOldItems {

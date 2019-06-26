@@ -1,9 +1,9 @@
 ---
 security:
   queueItemAuthenticator:
-  authenticators:
-    - global:
-      strategy: "anonymousAuthorizationStrategy"
+    authenticators:
+      - global:
+          strategy: "anonymousAuthorizationStrategy"
 jenkins:
   authorizationStrategy:
     projectMatrix:
@@ -108,7 +108,7 @@ jobs:
                     traits {
                       pruneStaleBranchTrait()
                       gitHubBranchDiscovery {
-                        strategyId(1)
+                        strategyId(3)
                       }
                       gitHubTagDiscovery()
                     }
@@ -171,7 +171,7 @@ jobs:
           configure {
             def traits = it / navigators / 'org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator' / traits
             traits << 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait' {
-                strategyId 1
+                strategyId 3
             }
             traits << 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait' {
                 strategyId 2

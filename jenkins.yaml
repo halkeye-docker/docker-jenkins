@@ -3,7 +3,7 @@ security:
   queueItemAuthenticator:
     authenticators:
       - global:
-          strategy: "anonymousAuthorizationStrategy"
+          strategy: "systemAuthorizationStrategy"
 jenkins:
   authorizationStrategy:
     projectMatrix:

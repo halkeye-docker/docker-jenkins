@@ -113,6 +113,12 @@ jobs:
                       gitHubTagDiscovery()
                     }
                   }
+                  buildStrategies {
+                    buildTags {
+                      atLeastDays '-1'
+                      atMostDays '3'
+                    }
+                  }
                 }
               }
             }

@@ -114,6 +114,7 @@ jobs:
                     }
                   }
                   buildStrategies {
+                    buildRegularBranches()
                     buildTags {
                       atLeastDays '-1'
                       atMostDays '3'

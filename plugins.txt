@@ -20,6 +20,7 @@ github-oauth
 github-pr-comment-build
 github-pr-coverage-status
 github-pullrequest
+github-scm-trait-notification-context
 greenballs
 html5-notifier-plugin
 http_request

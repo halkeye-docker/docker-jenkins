@@ -150,11 +150,25 @@ jobs:
       bitbucketProjects.keySet().each { username ->
         bitbucketProjects[username].each { slug ->
           multibranchPipelineJob("bitbucket_projects/" + username + "_" + slug) {
-            configure {
-              it / sources / data / 'jenkins.branch.BranchSource' / source(class: 'com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource') {
-                credentialsId('bitbucket-halkeye')
-                repoOwner(username)
-                repository(slug)
+            branchSources {
+              branchSource {
+                source {
+                  bitbucket {
+                    credentialsId('bitbucket-halkeye')
+                    repoOwner(username)
+                    repository(slug)
+                    traits {
+                      pruneStaleBranchTrait()
+                    }
+                  }
+                  buildStrategies {
+                    buildRegularBranches()
+                    buildTags {
+                      atLeastDays '-1'
+                      atMostDays '3'
+                    }
+                  }
+                }
               }
             }
             orphanedItemStrategy {
@@ -169,14 +183,26 @@ jobs:
       githubOrgs.each { slug ->
         organizationFolder("github_orgs/" + slug) {
           orphanedItemStrategy {
+            defaultOrphanedItemStrategy {
+              pruneDeadBranches(true)
+              numToKeepStr("5")
+              daysToKeepStr("")
+            }
             discardOldItems {
               numToKeep(5)
             }
           }
-          configure {
-            it / navigators / "org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator" << {
-                repoOwner(slug)
-                credentialsId("github-halkeye")
+          organizations {
+            github {
+              credentialsId("github-halkeye")
+              repoOwner(slug)
+              traits {
+                pruneStaleBranchTrait()
+                gitHubBranchDiscovery {
+                  strategyId(3)
+                }
+                gitHubTagDiscovery()
+              }
             }
           }
           configure {
@@ -189,10 +215,21 @@ jobs:
                 trust(class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustPermission')
             }
             traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-                strategyId 2
+                strategyId 4
             }
             traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
 
+            }
+            traits << 'org.jenkinsci.plugins.githubScmTraitNotificationContext.NotificationContextTrait' {
+              typeSuffix true
+              contextLabel "continuous-integration/halkeye"
+            }
+            def buildStrategies = it / buildStrategies
+            buildStrategies << 'jenkins.branch.buildstrategies.basic.BranchBuildStrategyImpl' {
+            }
+            buildStrategies << 'jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl' {
+              atLeastMillis 1
+              atMostMillis 259200000
             }
           }
         }

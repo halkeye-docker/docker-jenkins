@@ -32,8 +32,8 @@ unclassified:
   sonarGlobalConfiguration:
     buildWrapperEnabled: true
     installations:
-      - credentialsId: "sonarqube-g4v-halkeye"
-        name: "g4v"
+      - name: "g4v"
+        serverAuthenticationToken: "sonarqube-g4v-halkeye"
         serverUrl: "https://sonarqube.g4v.dev"
         triggers:
           skipScmCause: false

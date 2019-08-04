@@ -103,6 +103,8 @@ jobs:
                 source {
                   github {
                     credentialsId("github-halkeye")
+                    configuredByUrl true
+                    repositoryUrl "https://github.com/" + username + "/" + slug
                     repoOwner(username)
                     repository(slug)
                     traits {

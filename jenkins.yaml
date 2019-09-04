@@ -13,6 +13,9 @@ jenkins:
         - "Overall/Administer:halkeye"
         - "Overall/Read:authenticated"
 unclassified:
+  location:
+    adminAddress: "jenkins@gavinmogan.com"
+    url: "https://jenkins.gavinmogan.com/"
   extendedEmailPublisher:
     defaultReplyTo: "jenkins@gavinmogan.com"
     smtpPort: "25"
@@ -21,11 +24,7 @@ unclassified:
     hookUrl: "https://jenkins.gavinmogan.com/github-webhook/"
   githubPullRequests:
     publishedURL: "https://jenkins.gavinmogan.com"
-  location:
-    adminAddress: "jenkins@gavinmogan.com"
-    url: "https://jenkins.gavinmogan.com/"
   mailer:
-    adminAddress: "jenkins@gavinmogan.com"
     replyToAddress: "jenkins@gavinmogan.com"
     smtpHost: "odin.kodekoan.com"
     smtpPort: "25"

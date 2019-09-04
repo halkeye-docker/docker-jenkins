@@ -33,6 +33,7 @@ unclassified:
     buildWrapperEnabled: true
     installations:
       - name: "g4v"
+        serverAuthenticationToken: ""
         credentialsId: "sonarqube-g4v-halkeye"
         serverUrl: "https://sonarqube.g4v.dev"
         triggers:

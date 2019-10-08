@@ -35,9 +35,13 @@ unclassified:
         serverAuthenticationToken: ""
         credentialsId: "sonarqube-g4v-halkeye"
         serverUrl: "https://sonarqube.g4v.dev"
+        mojoVersion: ""
+        additionalProperties: ""
+        additionalAnalysisProperties: ""
         triggers:
           skipScmCause: false
           skipUpstreamCause: false
+          envVar: ""
   globalLibraries:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"
@@ -49,7 +53,8 @@ unclassified:
 tool:
   sonarRunnerInstallation:
     installations:
-      - name:
+      - name: "Sonarqube"
+        home: ""
         properties:
           - installSource:
               installers:

@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 build: ## Build docker image
-	docker build --build-arg JENKINS_VERSION=$(shell curl -qLs https://updates.jenkins.io/stable/latestCore.txt) -t halkeye/jenkins:latest .
+	docker build --build-arg JENKINS_VERSION=$(shell curl -qLs https://updates.jenkins.io/stable/latestCore.txt) -t halkeye/jenkins:latest . --no-cache
 
 push: ## push to docker hub
 	docker push halkeye/jenkins:latest

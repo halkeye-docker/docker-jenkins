@@ -35,6 +35,7 @@ unclassified:
         serverAuthenticationToken: ""
         credentialsId: "sonarqube-g4v-halkeye"
         serverUrl: "https://sonarqube.g4v.dev"
+        webhookSecretId: ""
         mojoVersion: ""
         additionalProperties: ""
         additionalAnalysisProperties: ""

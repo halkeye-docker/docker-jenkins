@@ -28,7 +28,6 @@ jdk-tool
 job-dsl
 lockable-resources
 matrix-auth
-phabricator-plugin
 pipeline-utility-steps
 pipeline-stage-view
 sauce-ondemand

@@ -15,7 +15,7 @@ dockerTemplateBase.setTty(true);
 DockerTemplate dockerTemplate = new DockerTemplate(
     dockerTemplateBase,
     new DockerComputerAttachConnector(),
-    "docker-slave", /* labelString */
+    "docker-slave linux docker", /* labelString */
     "/home/jenkins", /* remoteFs */
     "2147483647" /* instanceCapStr */
 )

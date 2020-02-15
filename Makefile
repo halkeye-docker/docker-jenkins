@@ -1,13 +1,17 @@
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := build
+
+NAME = jenkins
+TAGNAME = halkeye/$(NAME)
+VERSION = k8s
 
 build: ## Build docker image
-	docker build --build-arg JENKINS_VERSION=$(shell curl -qLs https://updates.jenkins.io/stable/latestCore.txt) -t halkeye/jenkins:latest . --no-cache
+	docker build -t $(TAGNAME):$(VERSION) .
 
 push: ## push to docker hub
-	docker push halkeye/jenkins:latest
+	docker push $(TAGNAME):$(VERSION)
 
 run:
-	docker run -it -p 3000:8080 halkeye/jenkins:latest
+	docker run -it --name $(NAME) -p 3000:8080 $(TAGNAME):$(VERSION)
 
 .PHONY: help
 help:

@@ -1,48 +1,116 @@
----
 security:
   queueItemAuthenticator:
     authenticators:
       - global:
           strategy: "systemAuthorizationStrategy"
 jenkins:
+  disableRememberMe: false
+  agentProtocols:
+    - "JNLP4-connect"
+    - "Ping"
   authorizationStrategy:
     projectMatrix:
       permissions:
-        - "Agent/Build:anonymous"
-        - "Job/Discover:anonymous"
-        - "Overall/Administer:halkeye"
-        - "Overall/Read:authenticated"
+      - "Agent/Build:anonymous"
+      - "Job/Discover:anonymous"
+      - "Overall/Administer:halkeye"
+      - "Overall/Read:anonymous"
+      - "Overall/Read:authenticated"
+  securityRealm:
+    ldap:
+      configurations:
+        - server: openldap.openldap.svc.cluster.local
+          rootDN: "ou=users,dc=gavinmogan,dc=com"
+          managerDN: "cn=admin,dc=gavinmogan,dc=com"
+          managerPasswordSecret: 'V4Lhx3CCGGhCjyHlSuJ'
+          #userSearch: "cn="
+          #userSearchBase: "ou=users,dc=gavinmogan,dc=com"
+      cache:
+        size: 100
+        ttl: 10
+      userIdStrategy: CaseInsensitive
+      groupIdStrategy: CaseSensitive
+
+  numExecutors: 0
+  clouds:
+    - kubernetes:
+        containerCapStr: "10"
+        jenkinsTunnel: "jenkins-agent:50000"
+        jenkinsUrl: "http://jenkins:8080"
+        maxRequestsPerHostStr: "32"
+        name: "kubernetes"
+        namespace: "jenkins"
+        podLabels:
+        - key: "jenkins/jenkins-jenkins-slave"
+          value: "true"
+        serverUrl: "https://kubernetes.default"
+        templates:
+        - containers:
+          - alwaysPullImage: true
+            args: "^${computer.jnlpmac} ^${computer.name}"
+            envVars:
+            - envVar:
+                key: "JENKINS_URL"
+                value: "http://jenkins.jenkins.svc.cluster.local:8080"
+            image: "halkeye/dind-jenkins-slave:3.40-1-dind-1"
+            livenessProbe:
+              failureThreshold: 0
+              initialDelaySeconds: 0
+              periodSeconds: 0
+              successThreshold: 0
+              timeoutSeconds: 0
+            name: "jnlp"
+            privileged: true
+            resourceLimitCpu: "1.0"
+            resourceLimitMemory: "2048Mi"
+            resourceRequestCpu: "1.0"
+            resourceRequestMemory: "2048Mi"
+            # resourceLimitCpu: "1024m"
+            # resourceLimitMemory: "1024Mi"
+            # resourceRequestCpu: "1024m"
+            # resourceRequestMemory: "1024Mi"
+            ttyEnabled: true
+            workingDir: "/home/jenkins/agent"
+          hostNetwork: false
+          label: "jenkins-agent"
+          name: "default"
+          namespace: "jenkins"
+          nodeUsageMode: "NORMAL"
+          serviceAccount: "default"
+          # volumes:
+          # - hostPathVolume:
+          #     hostPath: "/var/run/docker.sock"
+          #     mountPath: "/var/run/docker.sock"
+          yamlMergeStrategy: "override"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
 unclassified:
+  bitbucketEndpointConfiguration:
+    endpoints:
+    - bitbucketCloudEndpoint:
+        credentialsId: "bitbucket-halkeye"
+        enableCache: false
+        manageHooks: true
+        repositoriesCacheDuration: 0
+        teamCacheDuration: 0
   location:
-    adminAddress: "jenkins@gavinmogan.com"
-    url: "https://jenkins.gavinmogan.com/"
+    adminAddress: "jenkins@g4v.dev"
+    url: "https://ci.g4v.dev/"
   extendedEmailPublisher:
-    defaultReplyTo: "jenkins@gavinmogan.com"
+    defaultReplyTo: "jenkins@g4v.dev"
     smtpPort: "25"
     smtpServer: "odin.kodekoan.com"
   gitHubPluginConfig:
-    hookUrl: "https://jenkins.gavinmogan.com/github-webhook/"
+    configs:
+      - credentialsId: "github-admin-halkeye"
+    hookUrl: "https://ci.g4v.dev/github-webhook/"
   githubPullRequests:
-    publishedURL: "https://jenkins.gavinmogan.com"
+    publishedURL: "https://ci.g4v.dev"
   mailer:
     replyToAddress: "jenkins@gavinmogan.com"
     smtpHost: "odin.kodekoan.com"
     smtpPort: "25"
-  sonarGlobalConfiguration:
-    buildWrapperEnabled: true
-    installations:
-      - name: "g4v"
-        serverAuthenticationToken: ""
-        credentialsId: "sonarqube-g4v-halkeye"
-        serverUrl: "https://sonarqube.g4v.dev"
-        webhookSecretId: ""
-        mojoVersion: ""
-        additionalProperties: ""
-        additionalAnalysisProperties: ""
-        triggers:
-          skipScmCause: false
-          skipUpstreamCause: false
-          envVar: ""
   globalLibraries:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"
@@ -51,194 +119,5 @@ unclassified:
             scm:
               git:
                 remote: "https://github.com/halkeye/jenkins-shared-library"
-tool:
-  sonarRunnerInstallation:
-    installations:
-      - name: "Sonarqube"
-        home: ""
-        properties:
-          - installSource:
-              installers:
-                - sonarRunnerInstaller:
-                    id: "3.3.0.1492"
-
 jobs:
-  - script: >
-      def githubProjects = new groovy.json.JsonSlurper().parse(
-        (new URL("https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/github_projects.json")).newReader()
-      );
-      def bitbucketProjects = new groovy.json.JsonSlurper().parse(
-        (new URL("https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/bitbucket_projects.json")).newReader()
-      );
-      def githubOrgs = new groovy.json.JsonSlurper().parse(
-        (new URL("https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/github_orgs.json")).newReader()
-      );
-
-      folder("github_projects") {
-        authorization {
-          ["nfg", "aliaoca", "authorized", "authenticated"].each { user ->
-            permission("hudson.model.Item.Read", user)
-            permission("hudson.model.Item.Discover", user)
-          }
-        }
-        displayName("Github Projects")
-        description("All the github projects")
-      }
-
-      folder("github_orgs") {
-        authorization {
-          ["nfg", "aliaoca", "authorized", "authenticated"].each { user ->
-            permission("hudson.model.Item.Read", user)
-            permission("hudson.model.Item.Discover", user)
-          }
-        }
-        displayName("Github Organization Projects")
-        description("")
-      }
-
-      folder("bitbucket_projects") {
-        displayName("Bitbucket Projects")
-        description("All the bitbucket projects")
-      }
-
-      githubProjects.keySet().each { username ->
-        githubProjects[username].each { slug ->
-          multibranchPipelineJob("github_projects/" + username + "_" + slug) {
-            branchSources {
-              branchSource {
-                source {
-                  github {
-                    credentialsId("github-halkeye")
-                    configuredByUrl true
-                    repositoryUrl "https://github.com/" + username + "/" + slug
-                    repoOwner(username)
-                    repository(slug)
-                    traits {
-                      pruneStaleBranchTrait()
-                      gitHubBranchDiscovery {
-                        strategyId(3)
-                      }
-                      gitHubTagDiscovery()
-                    }
-                  }
-                  buildStrategies {
-                    buildRegularBranches()
-                    buildTags {
-                      atLeastDays '-1'
-                      atMostDays '3'
-                    }
-                  }
-                }
-              }
-            }
-            configure {
-              // workaround for JENKINS-46202 (https://issues.jenkins-ci.org/browse/JENKINS-46202)
-              def traits = it / sources / data / 'jenkins.branch.BranchSource' / source / traits
-              traits << 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait' {
-                strategyId 2
-                trust(class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustPermission')
-              }
-              traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-                strategyId 4
-              }
-              traits << 'org.jenkinsci.plugins.githubScmTraitNotificationContext.NotificationContextTrait' {
-                typeSuffix true
-                contextLabel "continuous-integration/halkeye"
-              }
-            }
-            orphanedItemStrategy {
-              discardOldItems {
-                numToKeep(5)
-              }
-            }
-          }
-        }
-      }
-
-      bitbucketProjects.keySet().each { username ->
-        bitbucketProjects[username].each { slug ->
-          multibranchPipelineJob("bitbucket_projects/" + username + "_" + slug) {
-            branchSources {
-              branchSource {
-                source {
-                  bitbucket {
-                    credentialsId('bitbucket-halkeye')
-                    repoOwner(username)
-                    repository(slug)
-                    traits {
-                      pruneStaleBranchTrait()
-                    }
-                  }
-                  buildStrategies {
-                    buildRegularBranches()
-                    buildTags {
-                      atLeastDays '-1'
-                      atMostDays '3'
-                    }
-                  }
-                }
-              }
-            }
-            orphanedItemStrategy {
-              discardOldItems {
-                numToKeep(5)
-              }
-            }
-          }
-        }
-      }
-
-      githubOrgs.each { slug ->
-        organizationFolder("github_orgs/" + slug) {
-          orphanedItemStrategy {
-            defaultOrphanedItemStrategy {
-              pruneDeadBranches(true)
-              numToKeepStr("5")
-              daysToKeepStr("")
-            }
-            discardOldItems {
-              numToKeep(5)
-            }
-          }
-          organizations {
-            github {
-              credentialsId("github-halkeye")
-              repoOwner(slug)
-              traits {
-                pruneStaleBranchTrait()
-                gitHubBranchDiscovery {
-                  strategyId(3)
-                }
-                gitHubTagDiscovery()
-              }
-            }
-          }
-          configure {
-            def traits = it / navigators / 'org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator' / traits
-            traits << 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait' {
-                strategyId 3
-            }
-            traits << 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait' {
-                strategyId 2
-                trust(class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustPermission')
-            }
-            traits << 'org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait' {
-                strategyId 4
-            }
-            traits << 'org.jenkinsci.plugins.github__branch__source.TagDiscoveryTrait' {
-
-            }
-            traits << 'org.jenkinsci.plugins.githubScmTraitNotificationContext.NotificationContextTrait' {
-              typeSuffix true
-              contextLabel "continuous-integration/halkeye"
-            }
-            def buildStrategies = it / buildStrategies
-            buildStrategies << 'jenkins.branch.buildstrategies.basic.BranchBuildStrategyImpl' {
-            }
-            buildStrategies << 'jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl' {
-              atLeastMillis 1
-              atMostMillis 259200000
-            }
-          }
-        }
-      }
+  - url: https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/jobs.groovy

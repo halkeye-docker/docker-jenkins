@@ -48,6 +48,7 @@ jenkins:
         - containers:
           - alwaysPullImage: true
             args: "^${computer.jnlpmac} ^${computer.name}"
+            command: "/usr/local/bin/wrapdocker"
             envVars:
             - envVar:
                 key: "JENKINS_URL"
@@ -61,22 +62,24 @@ jenkins:
               timeoutSeconds: 0
             name: "jnlp"
             privileged: true
-            resourceLimitCpu: "1.0"
+            resourceLimitCpu: "2.0"
             resourceLimitMemory: "2048Mi"
-            resourceRequestCpu: "1.0"
-            resourceRequestMemory: "2048Mi"
-            # resourceLimitCpu: "1024m"
-            # resourceLimitMemory: "1024Mi"
-            # resourceRequestCpu: "1024m"
-            # resourceRequestMemory: "1024Mi"
-            ttyEnabled: true
+            resourceRequestCpu: "2.0"
+            resourceRequestMemory: "1024Mi"
+            ttyEnabled: false
             workingDir: "/home/jenkins/agent"
           hostNetwork: false
+          idleMinutes: 30
+          idleMinutesStr: "30"
           label: "jenkins-agent"
           name: "default"
           namespace: "jenkins"
           nodeUsageMode: "NORMAL"
+          podRetention: "onFailure"
           serviceAccount: "default"
+          workspaceVolume:
+            emptyDirWorkspaceVolume:
+              memory: true
           # volumes:
           # - hostPathVolume:
           #     hostPath: "/var/run/docker.sock"

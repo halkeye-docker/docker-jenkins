@@ -2,7 +2,7 @@
 
 NAME = jenkins
 TAGNAME = halkeye/$(NAME)
-VERSION = k8s
+VERSION = latest
 
 build: ## Build docker image
 	docker build -t $(TAGNAME):$(VERSION) .

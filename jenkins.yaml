@@ -80,10 +80,16 @@ jenkins:
           workspaceVolume:
             emptyDirWorkspaceVolume:
               memory: true
-          # volumes:
-          # - hostPathVolume:
-          #     hostPath: "/var/run/docker.sock"
-          #     mountPath: "/var/run/docker.sock"
+           volumes:
+           - hostPathVolume:
+               hostPath: "/var/run/docker.sock"
+               mountPath: "/var/run/docker.sock"
+          yaml: |
+            spec:
+              dnsConfig:
+                options:
+                  - name: ndots
+                    value: "1"
           yamlMergeStrategy: "override"
   crumbIssuer:
     standard:

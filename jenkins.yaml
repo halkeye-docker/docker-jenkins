@@ -2,7 +2,7 @@ security:
   queueItemAuthenticator:
     authenticators:
       - global:
-          strategy: "systemAuthorizationStrategy"
+          strategy: "triggeringUsersAuthorizationStrategy"
 jenkins:
   disableRememberMe: false
   agentProtocols:

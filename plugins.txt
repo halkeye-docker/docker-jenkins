@@ -1,5 +1,6 @@
 ansicolor
 authorize-project
+badge
 basic-branch-build-strategies
 bitbucket-pullrequest-builder
 block-queued-job
@@ -33,6 +34,7 @@ lockable-resources
 matrix-auth
 pipeline-stage-view
 pipeline-utility-steps
+prometheus
 warnings-ng
 workflow-aggregator
 workflow-job

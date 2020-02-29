@@ -38,3 +38,4 @@ prometheus
 warnings-ng
 workflow-aggregator
 workflow-job
+ws-cleanup

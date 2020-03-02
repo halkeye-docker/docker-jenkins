@@ -22,9 +22,8 @@ jenkins:
         - server: openldap.openldap.svc.cluster.local
           rootDN: "ou=users,dc=gavinmogan,dc=com"
           managerDN: "cn=admin,dc=gavinmogan,dc=com"
-          managerPasswordSecret: 'V4Lhx3CCGGhCjyHlSuJ'
-          #userSearch: "cn="
-          #userSearchBase: "ou=users,dc=gavinmogan,dc=com"
+          managerPasswordSecret: "${LDAP_MANAGER_PASSWORD}"
+          userSearch: "(|(uid={0})(mail={0}))"
       cache:
         size: 100
         ttl: 10

@@ -117,7 +117,7 @@ unclassified:
     publishedURL: "https://ci.g4v.dev"
   mailer:
     replyToAddress: "jenkins@g4v.dev.com"
-    smtpHost: "odin.kdhcp.home"
+    smtpHost: "odin.dhcp.home"
     smtpPort: "25"
   globalLibraries:
     libraries:

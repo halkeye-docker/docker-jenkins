@@ -108,7 +108,7 @@ unclassified:
   extendedEmailPublisher:
     defaultReplyTo: "jenkins@g4v.dev"
     smtpPort: "25"
-    smtpServer: "odin.kodekoan.com"
+    smtpServer: "odin.dhcp.home"
   gitHubPluginConfig:
     configs:
       - credentialsId: "github-admin-halkeye"
@@ -116,8 +116,8 @@ unclassified:
   githubPullRequests:
     publishedURL: "https://ci.g4v.dev"
   mailer:
-    replyToAddress: "jenkins@gavinmogan.com"
-    smtpHost: "odin.kodekoan.com"
+    replyToAddress: "jenkins@g4v.dev.com"
+    smtpHost: "odin.kdhcp.home"
     smtpPort: "25"
   globalLibraries:
     libraries:

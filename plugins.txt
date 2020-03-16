@@ -32,6 +32,7 @@ kubernetes-credentials-provider
 ldap
 lockable-resources
 matrix-auth
+openid
 pipeline-stage-view
 pipeline-utility-steps
 prometheus

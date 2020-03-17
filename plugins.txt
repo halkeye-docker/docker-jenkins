@@ -32,10 +32,10 @@ kubernetes-credentials-provider
 ldap
 lockable-resources
 matrix-auth
-openid
 pipeline-stage-view
 pipeline-utility-steps
 prometheus
+saml
 warnings-ng
 workflow-aggregator
 workflow-job

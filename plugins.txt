@@ -26,6 +26,7 @@ html5-notifier-plugin
 http_request
 jdk-tool
 job-dsl
+keycloak
 kubernetes
 kubernetes-credentials
 kubernetes-credentials-provider

@@ -21,7 +21,7 @@ github-pr-comment-build
 github-pr-coverage-status
 github-pullrequest
 github-scm-trait-notification-context
-https://s3-us-west-1.amazonaws.com/files.halkeye.net/html5-notifier-plugin.hpi
+html5-notifier:custom::https://s3-us-west-1.amazonaws.com/files.halkeye.net/html5-notifier-plugin.hpi
 http_request
 jdk-tool
 job-dsl

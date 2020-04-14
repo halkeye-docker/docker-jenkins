@@ -25,7 +25,6 @@ html5-notifier:custom::https://s3-us-west-1.amazonaws.com/files.halkeye.net/html
 http_request
 jdk-tool
 job-dsl
-keycloak
 kubernetes
 kubernetes-credentials
 kubernetes-credentials-provider

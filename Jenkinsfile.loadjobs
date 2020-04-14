@@ -1,4 +1,0 @@
-node {
-  checkout scm
-  load 'groovy/0101-add-projects.groovy'
-}

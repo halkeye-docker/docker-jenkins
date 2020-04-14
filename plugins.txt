@@ -11,7 +11,7 @@ configuration-as-code
 configuration-as-code-support
 credentials
 credentials-binding
-docker-plugin
+docker-workflow
 email-ext
 favorite
 git
@@ -33,6 +33,7 @@ kubernetes-credentials-provider
 ldap
 lockable-resources
 matrix-auth
+oic-auth
 pipeline-stage-view
 pipeline-utility-steps
 prometheus

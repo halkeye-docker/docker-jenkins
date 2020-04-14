@@ -17,19 +17,22 @@ jenkins:
       - "Overall/Read:anonymous"
       - "Overall/Read:authenticated"
   securityRealm:
-    ldap:
-      configurations:
-        - server: openldap.openldap.svc.cluster.local
-          rootDN: "ou=users,dc=gavinmogan,dc=com"
-          managerDN: "cn=admin,dc=gavinmogan,dc=com"
-          managerPasswordSecret: "${LDAP_MANAGER_PASSWORD}"
-          userSearch: "(|(uid={0})(mail={0}))"
-      cache:
-        size: 100
-        ttl: 10
-      userIdStrategy: CaseInsensitive
-      groupIdStrategy: CaseSensitive
-
+    oic:
+      authorizationServerUrl: "https://keycloak.g4v.dev/auth/realms/Jenkins/protocol/openid-connect/auth"
+      clientId: "jenkins"
+      clientSecret: "${OIC_AUTH_SECRET}"
+      disableSslVerification: false
+      endSessionEndpoint: "https://keycloak.g4v.dev/auth/realms/Jenkins/protocol/openid-connect/logout"
+      escapeHatchEnabled: false
+      logoutFromOpenidProvider: true
+      scopes: "web-origins address phone openid roles profile offline_access microprofile-jwt email"
+      tokenServerUrl: "https://keycloak.g4v.dev/auth/realms/Jenkins/protocol/openid-connect/token"
+      userInfoServerUrl: "https://keycloak.g4v.dev/auth/realms/Jenkins/protocol/openid-connect/userinfo"
+      # wellKnownOpenIDConfigurationUrl: "https://keycloak.g4v.dev/auth/realms/Jenkins/.well-known/openid-configuration"
+      userNameField: "preferred_username"
+      emailFieldName: "email"
+      fullNameFieldName: "name"
+      groupsFieldName: "group-membership"
   numExecutors: 0
   clouds:
     - kubernetes:

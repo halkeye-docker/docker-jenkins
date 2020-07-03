@@ -36,7 +36,7 @@ jenkins:
   numExecutors: 0
   clouds:
     - kubernetes:
-        containerCapStr: "10"
+        containerCapStr: "2"
         jenkinsTunnel: "jenkins-agent:50000"
         jenkinsUrl: "http://jenkins:8080"
         maxRequestsPerHostStr: "32"

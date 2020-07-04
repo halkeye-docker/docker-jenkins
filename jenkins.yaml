@@ -19,8 +19,8 @@ jenkins:
   securityRealm:
     oic:
       authorizationServerUrl: "https://keycloak.g4v.dev/auth/realms/${OIC_AUTH_REALM}/protocol/openid-connect/auth"
-      clientId: "jenkins"
-      clientSecret: "${OIC_AUTH_SECRET}"
+      clientId: "${OIC_AUTH_CLIENT_ID}"
+      clientSecret: "${OIC_AUTH_CLIENT_SECRET}"
       disableSslVerification: false
       endSessionEndpoint: "https://keycloak.g4v.dev/auth/realms/${OIC_AUTH_REALM}/protocol/openid-connect/logout"
       escapeHatchEnabled: false

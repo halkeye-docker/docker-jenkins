@@ -11,6 +11,7 @@ configuration-as-code
 configuration-as-code-support
 credentials
 credentials-binding
+dark-theme
 docker-workflow
 email-ext
 favorite

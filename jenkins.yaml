@@ -18,17 +18,17 @@ jenkins:
       - "Overall/Read:authenticated"
   securityRealm:
     oic:
-      authorizationServerUrl: "https://keycloak.g4v.dev/auth/realms/Jenkins/protocol/openid-connect/auth"
+      authorizationServerUrl: "https://keycloak.g4v.dev/auth/realms/${OIC_AUTH_REALM}/protocol/openid-connect/auth"
       clientId: "jenkins"
       clientSecret: "${OIC_AUTH_SECRET}"
       disableSslVerification: false
-      endSessionEndpoint: "https://keycloak.g4v.dev/auth/realms/Jenkins/protocol/openid-connect/logout"
+      endSessionEndpoint: "https://keycloak.g4v.dev/auth/realms/${OIC_AUTH_REALM}/protocol/openid-connect/logout"
       escapeHatchEnabled: false
       logoutFromOpenidProvider: true
       scopes: "web-origins address phone openid roles profile offline_access microprofile-jwt email"
-      tokenServerUrl: "https://keycloak.g4v.dev/auth/realms/Jenkins/protocol/openid-connect/token"
-      userInfoServerUrl: "https://keycloak.g4v.dev/auth/realms/Jenkins/protocol/openid-connect/userinfo"
-      # wellKnownOpenIDConfigurationUrl: "https://keycloak.g4v.dev/auth/realms/Jenkins/.well-known/openid-configuration"
+      tokenServerUrl: "https://keycloak.g4v.dev/auth/realms/${OIC_AUTH_REALM}/protocol/openid-connect/token"
+      userInfoServerUrl: "https://keycloak.g4v.dev/auth/realms/${OIC_AUTH_REALM}/protocol/openid-connect/userinfo"
+      # wellKnownOpenIDConfigurationUrl: "https://keycloak.g4v.dev/auth/realms/${OIC_AUTH_REALM}/.well-known/openid-configuration"
       userNameField: "preferred_username"
       emailFieldName: "email"
       fullNameFieldName: "name"
@@ -36,7 +36,7 @@ jenkins:
   numExecutors: 0
   clouds:
     - kubernetes:
-        containerCapStr: "2"
+        containerCapStr: "3"
         jenkinsTunnel: "jenkins-agent:50000"
         jenkinsUrl: "http://jenkins:8080"
         maxRequestsPerHostStr: "32"

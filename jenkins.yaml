@@ -111,7 +111,7 @@ unclassified:
   extendedEmailPublisher:
     defaultReplyTo: "jenkins@g4v.dev"
     smtpPort: "25"
-    smtpServer: "odin.dhcp.home"
+    smtpServer: "${SMTP_SERVER}"
   gitHubPluginConfig:
     configs:
       - credentialsId: "github-admin-halkeye"
@@ -120,7 +120,7 @@ unclassified:
     publishedURL: "https://ci.g4v.dev"
   mailer:
     replyToAddress: "jenkins@g4v.dev.com"
-    smtpHost: "odin.dhcp.home"
+    smtpHost: "${SMTP_SERVER}"
     smtpPort: "25"
   globalLibraries:
     libraries:

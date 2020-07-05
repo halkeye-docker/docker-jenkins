@@ -119,7 +119,7 @@ unclassified:
   githubPullRequests:
     publishedURL: "https://ci.g4v.dev"
   mailer:
-    replyToAddress: "jenkins@g4v.dev.com"
+    replyToAddress: "jenkins@g4v.dev"
     smtpHost: "${SMTP_SERVER}"
     smtpPort: "25"
   globalLibraries:

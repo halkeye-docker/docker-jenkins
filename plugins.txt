@@ -8,7 +8,6 @@ cloudbees-bitbucket-branch-source
 cloudbees-folder
 codeclimate-plugin
 configuration-as-code
-configuration-as-code-support
 credentials
 credentials-binding
 dark-theme

@@ -6,7 +6,6 @@ bitbucket-pullrequest-builder
 block-queued-job
 cloudbees-bitbucket-branch-source
 cloudbees-folder
-codeclimate-plugin
 configuration-as-code
 credentials
 credentials-binding

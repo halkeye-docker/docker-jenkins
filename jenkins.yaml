@@ -110,7 +110,7 @@ unclassified:
   location:
     adminAddress: "jenkins@g4v.dev"
     url: "https://ci.g4v.dev/"
-  extendedEmailPublisher:
+  email-ext:
     defaultReplyTo: "jenkins@g4v.dev"
     smtpPort: "25"
     smtpServer: "${SMTP_SERVER}"

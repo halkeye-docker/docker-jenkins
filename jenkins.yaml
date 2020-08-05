@@ -4,6 +4,8 @@ security:
       - global:
           strategy: "triggeringUsersAuthorizationStrategy"
 jenkins:
+  remotingSecurity:
+    enabled: true
   disableRememberMe: false
   agentProtocols:
     - "JNLP4-connect"

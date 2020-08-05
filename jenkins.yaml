@@ -112,8 +112,9 @@ unclassified:
     url: "https://ci.g4v.dev/"
   email-ext:
     defaultReplyTo: "jenkins@g4v.dev"
-    smtpPort: "25"
-    smtpServer: "${SMTP_SERVER}"
+    mailAccount:
+      smtpPort: "25"
+      smtpHost: "${SMTP_SERVER}"
   gitHubPluginConfig:
     configs:
       - credentialsId: "github-admin-halkeye"

@@ -125,6 +125,16 @@ unclassified:
     replyToAddress: "jenkins@g4v.dev"
     smtpHost: "${SMTP_SERVER}"
     smtpPort: "25"
+  buildDiscarders:
+    configuredBuildDiscarders:
+      - "jobBuildDiscarder"
+      - simpleBuildDiscarder:
+          discarder:
+            logRotator:
+              numToKeepStr: "5"
+  themeManager:
+    disableUserThemes: false
+    theme: "darkSystem"
   globalLibraries:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"
@@ -133,5 +143,14 @@ unclassified:
             scm:
               git:
                 remote: "https://github.com/halkeye/jenkins-shared-library"
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+        - gitHubApp:
+            appID: "74743"
+            description: "GitHub app"
+            id: "github-app"
+            privateKey: "${GITHUB_APP_KEY}"
 jobs:
   - url: https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/jobs.groovy

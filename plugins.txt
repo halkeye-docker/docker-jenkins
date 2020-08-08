@@ -18,7 +18,6 @@ github-autostatus
 github-branch-source
 github-checks
 github-pr-comment-build
-github-pr-coverage-status
 github-pullrequest
 github-scm-trait-notification-context
 html5-notifier:custom::https://files.halkeye.net/html5-notifier-plugin.hpi

@@ -157,6 +157,24 @@ credentials:
             id: "github-app"
             privateKey: "${GITHUB_APP_KEY}"
             owner: "halkeye"
+        - gitHubApp:
+            appID: "74743"
+            description: "GitHub app"
+            id: "github-app-halkeye"
+            privateKey: "${GITHUB_APP_KEY}"
+            owner: "halkeye"
+        - gitHubApp:
+            appID: "74743"
+            description: "GitHub app"
+            id: "github-app-halkeye-docker"
+            privateKey: "${GITHUB_APP_KEY}"
+            owner: "halkeye-docker"
+        - gitHubApp:
+            appID: "74743"
+            description: "GitHub app"
+            id: "github-app-halkeye-helm-charts"
+            privateKey: "${GITHUB_APP_KEY}"
+            owner: "halkeye-helm-charts"
         - usernamePassword:
             scope: SYSTEM
             id: bitbucket-halkeye

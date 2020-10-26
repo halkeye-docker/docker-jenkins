@@ -52,12 +52,14 @@ jenkins:
         - containers:
           - alwaysPullImage: true
             args: "^${computer.jnlpmac} ^${computer.name}"
-            command: "/usr/local/bin/wrapdocker"
             envVars:
             - envVar:
                 key: "JENKINS_URL"
                 value: "http://jenkins.jenkins.svc.cluster.local:8080"
-            image: "halkeye/dind-jenkins-slave:3.40-1-dind-1"
+            image: "jenkins/jnlp-agent-docker"
+            runAsGroup: "998"
+            runAsUser: "1000"
+            supplementalGroups: "998"
             livenessProbe:
               failureThreshold: 0
               initialDelaySeconds: 0
@@ -68,7 +70,7 @@ jenkins:
             privileged: true
             resourceLimitCpu: "2.0"
             resourceLimitMemory: "2048Mi"
-            resourceRequestCpu: "2.0"
+            resourceRequestCpu: "1.0"
             resourceRequestMemory: "1024Mi"
             ttyEnabled: false
             workingDir: "/home/jenkins/agent"
@@ -142,6 +144,8 @@ unclassified:
           modernSCM:
             scm:
               git:
+                credentialsId: "github-app"
+                id: "29f65a8c-bc76-4fba-bddc-ac27fa04ccf4"
                 remote: "https://github.com/halkeye/jenkins-shared-library"
 credentials:
   system:
@@ -152,5 +156,66 @@ credentials:
             description: "GitHub app"
             id: "github-app"
             privateKey: "${GITHUB_APP_KEY}"
+            owner: "halkeye"
+        - usernamePassword:
+            scope: SYSTEM
+            id: bitbucket-halkeye
+            username: halkeye
+            password: "${BITBUCKET_HALKEYE_PASSWORD}"
+        - usernamePassword:
+            scope: SYSTEM
+            id: contentful-halkeye
+            username: "${CONTENTFUL_HALKEYE_USERNAME}"
+            password: "${CONTENTFUL_HALKEYE_PASSWORD}"
+        - usernamePassword:
+            scope: SYSTEM
+            id: dockerhub-halkeye
+            username: "${DOCKERHUB_HALKEYE_USERNAME}"
+            password: "${DOCKERHUB_HALKEYE_PASSWORD}"
+        - string:
+            scope: SYSTEM
+            id: github-admin-halkeye
+            secret: "${GITHUB_ADMIN_HALKEYE_SECRET}"
+        - usernamePassword:
+            scope: SYSTEM
+            id: github-halkeye
+            username: "${GITHUB_HALKEYE_USERNAME}"
+            password: "${GITHUB_HALKEYE_PASSWORD}"
+        - string:
+            scope: SYSTEM
+            id: github-halkeye-react-book-reader
+            secret: "${GITHUB_HALKEYE_REACT_BOOK_READER_SECRET}"
+        - usernamePassword:
+            scope: SYSTEM
+            id: goodreads
+            username: "${GOODREADS_USERNAME}"
+            password: "${GOODREADS_PASSWORD}"
+        - basicSSHUserPrivateKey:
+            scope: SYSTEM
+            id: halkeye-bitbucket
+            passphrase: "${HALKEYE_BITUCKET_PASSPHRASE}"
+            privateKeySource:
+              directEntry:
+                privateKey: "${HALKEYE_BITUCKET_KEY}"
+            username: "${HALKEYE_BITUCKET_USERNAME}"
+        - usernamePassword:
+            scope: SYSTEM
+            id: halkeye-quay
+            username: "${HALKEYE_QUAY_USERNAME}"
+            password: "${HALKEYE_QUAY_PASSWORD}"
+        - usernamePassword:
+            scope: SYSTEM
+            id: halkeye-surge
+            username: "${HALKEYE_SURGE_USERNAME}"
+            password: "${HALKEYE_SURGE_PASSWORD}"
+        - string:
+            scope: SYSTEM
+            id: netlify-gavinmogan
+            secret: "${GITHUB_NETLIFY_GAVINMOGAN_SECRET}"
+        - usernamePassword:
+            scope: SYSTEM
+            id: sauce-minecraft-gavinmogan
+            username: "${SAUCE_MINECRAFT_GAVINMOGAN_USERNAME}"
+            password: "${SAUCE_MINECRAFT_GAVINMOGAN_PASSWORD}"
 jobs:
   - url: https://raw.githubusercontent.com/halkeye/jenkins-jobs/master/jobs.groovy

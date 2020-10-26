@@ -176,40 +176,32 @@ credentials:
             privateKey: "${GITHUB_APP_KEY}"
             owner: "halkeye-helm-charts"
         - usernamePassword:
-            scope: SYSTEM
             id: bitbucket-halkeye
             username: halkeye
             password: "${BITBUCKET_HALKEYE_PASSWORD}"
         - usernamePassword:
-            scope: SYSTEM
             id: contentful-halkeye
             username: "${CONTENTFUL_HALKEYE_USERNAME}"
             password: "${CONTENTFUL_HALKEYE_PASSWORD}"
         - usernamePassword:
-            scope: SYSTEM
             id: dockerhub-halkeye
             username: "${DOCKERHUB_HALKEYE_USERNAME}"
             password: "${DOCKERHUB_HALKEYE_PASSWORD}"
         - string:
-            scope: SYSTEM
             id: github-admin-halkeye
             secret: "${GITHUB_ADMIN_HALKEYE_SECRET}"
         - usernamePassword:
-            scope: SYSTEM
             id: github-halkeye
             username: "${GITHUB_HALKEYE_USERNAME}"
             password: "${GITHUB_HALKEYE_PASSWORD}"
         - string:
-            scope: SYSTEM
             id: github-halkeye-react-book-reader
             secret: "${GITHUB_HALKEYE_REACT_BOOK_READER_SECRET}"
         - usernamePassword:
-            scope: SYSTEM
             id: goodreads
             username: "${GOODREADS_USERNAME}"
             password: "${GOODREADS_PASSWORD}"
         - basicSSHUserPrivateKey:
-            scope: SYSTEM
             id: halkeye-bitbucket
             passphrase: "${HALKEYE_BITUCKET_PASSPHRASE}"
             privateKeySource:
@@ -217,21 +209,17 @@ credentials:
                 privateKey: "${HALKEYE_BITUCKET_KEY}"
             username: "${HALKEYE_BITUCKET_USERNAME}"
         - usernamePassword:
-            scope: SYSTEM
             id: halkeye-quay
             username: "${HALKEYE_QUAY_USERNAME}"
             password: "${HALKEYE_QUAY_PASSWORD}"
         - usernamePassword:
-            scope: SYSTEM
             id: halkeye-surge
             username: "${HALKEYE_SURGE_USERNAME}"
             password: "${HALKEYE_SURGE_PASSWORD}"
         - string:
-            scope: SYSTEM
             id: netlify-gavinmogan
             secret: "${GITHUB_NETLIFY_GAVINMOGAN_SECRET}"
         - usernamePassword:
-            scope: SYSTEM
             id: sauce-minecraft-gavinmogan
             username: "${SAUCE_MINECRAFT_GAVINMOGAN_USERNAME}"
             password: "${SAUCE_MINECRAFT_GAVINMOGAN_PASSWORD}"

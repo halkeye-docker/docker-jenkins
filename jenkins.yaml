@@ -59,7 +59,6 @@ jenkins:
             image: "jenkins/jnlp-agent-docker"
             runAsGroup: "998"
             runAsUser: "1000"
-            supplementalGroups: "998"
             livenessProbe:
               failureThreshold: 0
               initialDelaySeconds: 0
@@ -153,25 +152,26 @@ credentials:
       - credentials:
         - gitHubApp:
             appID: "74743"
-            description: "GitHub app"
+            description: "GitHub app - github-app"
             id: "github-app"
             privateKey: "${GITHUB_APP_KEY}"
             owner: "halkeye"
         - gitHubApp:
             appID: "74743"
             description: "GitHub app"
+            description: "GitHub app - github-app-halkeye"
             id: "github-app-halkeye"
             privateKey: "${GITHUB_APP_KEY}"
             owner: "halkeye"
         - gitHubApp:
             appID: "74743"
-            description: "GitHub app"
+            description: "GitHub app - github-app-halkeye-docker"
             id: "github-app-halkeye-docker"
             privateKey: "${GITHUB_APP_KEY}"
             owner: "halkeye-docker"
         - gitHubApp:
             appID: "74743"
-            description: "GitHub app"
+            description: "GitHub app - github-app-halkeye-helm-charts"
             id: "github-app-halkeye-helm-charts"
             privateKey: "${GITHUB_APP_KEY}"
             owner: "halkeye-helm-charts"

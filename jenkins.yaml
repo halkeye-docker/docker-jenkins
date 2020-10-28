@@ -139,6 +139,7 @@ unclassified:
   globalLibraries:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"
+        implicit: true
         retriever:
           modernSCM:
             scm:

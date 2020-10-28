@@ -140,6 +140,7 @@ unclassified:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"
         implicit: true
+        defaultVersion: "master"
         retriever:
           modernSCM:
             scm:

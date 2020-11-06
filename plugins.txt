@@ -20,7 +20,6 @@ github-checks
 github-pr-comment-build
 github-pullrequest
 github-scm-trait-notification-context
-html5-notifier:custom::https://files.halkeye.net/html5-notifier-plugin.hpi
 http_request
 jdk-tool
 job-dsl
@@ -38,3 +37,4 @@ warnings-ng
 workflow-aggregator
 workflow-job
 ws-cleanup
+html5-notifier-plugin:incrementals;org.jenkins-ci.plugins;2.0-rc81.e010978d25a4

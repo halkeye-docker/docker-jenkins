@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.265-alpine
+FROM jenkins/jenkins:2.266-alpine
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN wget -o /dev/null -O /tmp/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.1.1/jenkins-plugin-manager-2.1.1.jar && \
     chmod 777 /tmp/jenkins-plugin-manager.jar && \

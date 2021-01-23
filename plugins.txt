@@ -29,6 +29,7 @@ kubernetes-credentials
 kubernetes-credentials-provider
 ldap
 lockable-resources
+markdown-formatter
 matrix-auth
 oic-auth
 pipeline-stage-view

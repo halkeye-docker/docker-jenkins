@@ -2,7 +2,7 @@
 
 NAME = jenkins
 TAGNAME = halkeye/$(NAME)
-VERSION = latest
+VERSION = $(shell git log -n 1 --pretty=format:'%h')
 
 build: ## Build docker image
 	docker build -t $(TAGNAME):$(VERSION) .
@@ -11,7 +11,11 @@ push: ## push to docker hub
 	docker push $(TAGNAME):$(VERSION)
 
 run:
-	docker run -it --name $(NAME) -p 3000:8080 $(TAGNAME):$(VERSION)
+	docker run --rm -it --name $(NAME) -p 3000:8080 $(TAGNAME):$(VERSION)
+
+bash:
+	docker run --rm -it --name $(NAME) --entrypoint="" $(TAGNAME):$(VERSION) sh
+
 
 .PHONY: help
 help:

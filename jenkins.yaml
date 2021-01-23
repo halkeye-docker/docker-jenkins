@@ -189,6 +189,10 @@ credentials:
             id: dockerhub-halkeye
             username: "${DOCKERHUB_HALKEYE_USERNAME}"
             password: "${DOCKERHUB_HALKEYE_PASSWORD}"
+        - usernamePassword:
+            id: modio-halkeye
+            username: "${MODIO_HALKEYE_EMAIL}"
+            password: "${MODIO_HALKEYE_API_KEY}"
         - string:
             id: github-admin-halkeye
             secret: "${GITHUB_ADMIN_HALKEYE_SECRET}"

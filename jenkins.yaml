@@ -18,6 +18,7 @@ jenkins:
       - "Overall/Administer:halkeye"
       - "Overall/Read:anonymous"
       - "Overall/Read:authenticated"
+  markupFormatter: "markdownFormatter"
   securityRealm:
     oic:
       authorizationServerUrl: "https://keycloak.g4v.dev/auth/realms/${OIC_AUTH_REALM}/protocol/openid-connect/auth"
@@ -136,6 +137,8 @@ unclassified:
   themeManager:
     disableUserThemes: false
     theme: "darkSystem"
+  globalDefaultFlowDurabilityLevel:
+    durabilityHint: PERFORMANCE_OPTIMIZED
   globalLibraries:
     libraries:
       - name: "github.com/halkeye/jenkins-shared-library"

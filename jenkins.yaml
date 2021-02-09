@@ -121,8 +121,6 @@ unclassified:
     configs:
       - credentialsId: "github-admin-halkeye"
     hookUrl: "https://ci.g4v.dev/github-webhook/"
-  githubPullRequests:
-    publishedURL: "https://ci.g4v.dev"
   mailer:
     replyToAddress: "jenkins@g4v.dev"
     smtpHost: "${SMTP_SERVER}"

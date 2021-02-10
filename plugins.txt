@@ -4,6 +4,7 @@ badge
 basic-branch-build-strategies
 bitbucket-pullrequest-builder
 block-queued-job
+checks-api
 cloudbees-bitbucket-branch-source
 cloudbees-folder
 configuration-as-code

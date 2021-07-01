@@ -1,3 +1,3 @@
 #!/usr/bin/groovy
 @Library('github.com/halkeye/jenkins-shared-library@master') _
-buildDockerfile('halkeye/jenkins', [skipPull: true])
+buildDockerfile('halkeye/jenkins', [skipPull: true, noCache: true])

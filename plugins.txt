@@ -36,6 +36,7 @@ pipeline-stage-view
 pipeline-utility-steps
 prometheus
 ssh-agent
+ssh-slaves
 warnings-ng
 workflow-aggregator
 workflow-job

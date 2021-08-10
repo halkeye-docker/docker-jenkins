@@ -35,6 +35,7 @@ oic-auth
 pipeline-stage-view
 pipeline-utility-steps
 prometheus
+ssh-agent
 warnings-ng
 workflow-aggregator
 workflow-job

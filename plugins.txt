@@ -20,7 +20,6 @@ github-autostatus
 github-branch-source
 github-checks
 github-scm-trait-notification-context
-github-pullrequest
 http_request
 jdk-tool
 job-dsl
@@ -33,6 +32,7 @@ lighthouse-report
 markdown-formatter
 matrix-auth
 oic-auth
+pipeline-github
 pipeline-stage-view
 pipeline-utility-steps
 prometheus

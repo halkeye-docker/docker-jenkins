@@ -20,6 +20,7 @@ github-autostatus
 github-branch-source
 github-checks
 github-scm-trait-notification-context
+github-integration-plugin
 http_request
 jdk-tool
 job-dsl

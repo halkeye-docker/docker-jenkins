@@ -12,6 +12,7 @@ credentials
 credentials-binding
 dark-theme
 digitalocean-plugin
+discord-notifier
 docker-workflow
 email-ext
 favorite
@@ -20,6 +21,7 @@ github-autostatus
 github-branch-source
 github-checks
 github-scm-trait-notification-context
+html5-notifier-plugin:incrementals;org.jenkins-ci.plugins;2.0-rc81.e010978d25a4
 http_request
 jdk-tool
 job-dsl
@@ -27,8 +29,8 @@ kubernetes
 kubernetes-credentials
 kubernetes-credentials-provider
 ldap
-lockable-resources
 lighthouse-report
+lockable-resources
 markdown-formatter
 matrix-auth
 oic-auth
@@ -42,4 +44,3 @@ warnings-ng
 workflow-aggregator
 workflow-job
 ws-cleanup
-html5-notifier-plugin:incrementals;org.jenkins-ci.plugins;2.0-rc81.e010978d25a4

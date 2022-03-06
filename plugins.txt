@@ -20,10 +20,11 @@ git
 github-autostatus
 github-branch-source
 github-checks
+github-label-filter
 github-scm-trait-notification-context
 html5-notifier-plugin:incrementals;org.jenkins-ci.plugins;2.0-rc81.e010978d25a4
-http_request
 htmlpublisher
+http_request
 jdk-tool
 job-dsl
 kubernetes

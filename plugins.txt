@@ -18,7 +18,7 @@ docker-workflow:1.28
 email-ext:2.87
 favorite:2.4.1
 git:4.11.0
-git-changelog:3.21
+git-changelog:3.23
 github-autostatus:3.6.2
 github-branch-source:1583.v18d333ef7379
 github-checks:1.0.18

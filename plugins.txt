@@ -27,7 +27,7 @@ html5-notifier-plugin:incrementals;org.jenkins-ci.plugins;2.0-rc81.e010978d25a4
 htmlpublisher:1.29
 http_request:1.14
 jdk-tool:1.5
-job-dsl:1.78.3
+job-dsl:1.79
 kubernetes:3578.vb_9a_92ea_9845a_
 kubernetes-credentials:0.9.0
 kubernetes-credentials-provider:0.20

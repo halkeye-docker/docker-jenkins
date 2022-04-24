@@ -38,7 +38,7 @@ markdown-formatter:0.2.0
 matrix-auth:3.1.1
 oic-auth:1.8
 pipeline-github:2.8-138.d766e30bb08b
-pipeline-stage-view:2.23
+pipeline-stage-view:2.24
 pipeline-utility-steps:2.12.0
 prometheus:2.0.11
 ssh-agent:1.24.1

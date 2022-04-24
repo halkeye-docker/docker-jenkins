@@ -24,7 +24,7 @@ github-checks:1.0.18
 github-label-filter:1.0.0
 github-scm-trait-notification-context:1.1
 html5-notifier-plugin:incrementals;org.jenkins-ci.plugins;2.0-rc81.e010978d25a4
-htmlpublisher:1.29
+htmlpublisher:1.30
 http_request:1.14
 jdk-tool:1.5
 job-dsl:1.79

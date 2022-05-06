@@ -4,7 +4,7 @@ badge:1.9.1
 basic-branch-build-strategies:1.3.2
 bitbucket-pullrequest-builder:1.5.0
 block-queued-job:0.2.0
-checks-api:1.7.3
+checks-api:1.7.4
 cloudbees-bitbucket-branch-source:765.v5a_2d6a_23c01d
 cloudbees-disk-usage-simple:0.10
 cloudbees-folder:6.714.v79e858ef76a_2

@@ -19,7 +19,7 @@ email-ext:2.88
 favorite:2.4.1
 git:4.11.1
 github-autostatus:3.6.2
-github-branch-source:1619.v962f131fa_c15
+github-branch-source:1628.vb_2f51293cb_78
 github-checks:1.0.18
 github-label-filter:1.0.0
 github-scm-trait-notification-context:1.1

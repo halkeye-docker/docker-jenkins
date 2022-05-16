@@ -7,7 +7,7 @@ block-queued-job:0.2.0
 checks-api:1.7.4
 cloudbees-bitbucket-branch-source:765.v5a_2d6a_23c01d
 cloudbees-disk-usage-simple:0.10
-cloudbees-folder:6.714.v79e858ef76a_2
+cloudbees-folder:6.722.v8165b_a_cf25e9
 configuration-as-code:1429.v09b_044a_c93de
 credentials:1126.ve05618c41e62
 credentials-binding:523.vd859a_4b_122e6

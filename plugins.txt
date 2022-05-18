@@ -17,7 +17,7 @@ discord-notifier:206.vee9f4569ee63
 docker-workflow:1.28
 email-ext:2.88
 favorite:2.4.1
-git:4.11.2
+git:4.11.3
 github-autostatus:3.6.2
 github-branch-source:1628.vb_2f51293cb_78
 github-checks:1.0.18

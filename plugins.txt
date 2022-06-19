@@ -43,7 +43,7 @@ pipeline-utility-steps:2.12.2
 prometheus:2.0.11
 ssh-agent:295.v9ca_a_1c7cc3a_a_
 ssh-slaves:1.814.vc82988f54b_10
-warnings-ng:9.12.0
+warnings-ng:9.13.0
 workflow-aggregator:581.v0c46fa_697ffd
 workflow-job:1186.v8def1a_5f3944
 ws-cleanup:0.42

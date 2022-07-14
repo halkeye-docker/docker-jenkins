@@ -28,7 +28,7 @@ htmlpublisher:1.30
 http_request:1.15
 jdk-tool:1.5
 job-dsl:1.80
-kubernetes:3651.v908e7db_10d06
+kubernetes:3663.v1c1e0ec5b_650
 kubernetes-credentials:0.9.0
 kubernetes-credentials-provider:0.21
 ldap:2.10

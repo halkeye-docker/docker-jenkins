@@ -42,7 +42,7 @@ pipeline-stage-view:2.24
 pipeline-utility-steps:2.13.0
 prometheus:2.0.11
 ssh-agent:295.v9ca_a_1c7cc3a_a_
-ssh-slaves:1.821.vd834f8a_c390e
+ssh-slaves:1.834.v622da_57f702c
 warnings-ng:9.14.0
 workflow-aggregator:590.v6a_d052e5a_a_b_5
 workflow-job:1206.vc48d96b_930b_2

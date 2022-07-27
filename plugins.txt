@@ -30,7 +30,7 @@ jdk-tool:1.5
 job-dsl:1.81
 kubernetes:3670.v6ca_059233222
 kubernetes-credentials:0.9.0
-kubernetes-credentials-provider:0.22
+kubernetes-credentials-provider:1.196.va_55f5e31e3c2
 ldap:2.10
 lighthouse-report:1.3.0
 lockable-resources:2.16

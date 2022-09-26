@@ -9,7 +9,7 @@ cloudbees-bitbucket-branch-source:791.vb_eea_a_476405b
 cloudbees-disk-usage-simple:170.va_fd5b_4ee6858
 cloudbees-folder:6.758.vfd75d09eea_a_1
 configuration-as-code:1512.vb_79d418d5fc8
-credentials:1143.vb_e8b_b_ceee347
+credentials:1189.vf61b_a_5e2f62e
 credentials-binding:523.vd859a_4b_122e6
 dark-theme:245.vb_a_2b_b_010ea_96
 digitalocean-plugin:1.3.1

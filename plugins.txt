@@ -42,7 +42,7 @@ prometheus:2.0.11
 ssh-agent:295.v9ca_a_1c7cc3a_a_
 ssh-slaves:2.846.v1b_70190624f5
 timestamper:1.20
-warnings-ng:9.20.0
+warnings-ng:9.20.1
 workflow-aggregator:590.v6a_d052e5a_a_b_5
 workflow-job:1239.v71b_b_a_124a_725
 ws-cleanup:0.43

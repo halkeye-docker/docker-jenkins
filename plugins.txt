@@ -33,7 +33,7 @@ lighthouse-report:1.3.0
 lockable-resources:2.18
 markdown-formatter:0.2.0
 matrix-auth:3.1.5
-oic-auth:2.1
+oic-auth:2.2
 pipeline-github:2.8-138.d766e30bb08b
 pipeline-graph-view:126.vc84e8c9d6233
 pipeline-stage-view:2.27

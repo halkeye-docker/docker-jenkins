@@ -37,7 +37,7 @@ oic-auth:2.2
 pipeline-github:2.8-138.d766e30bb08b
 pipeline-graph-view:143.v33ca_60725f13
 pipeline-stage-view:2.27
-pipeline-utility-steps:2.13.2
+pipeline-utility-steps:2.14.0
 prometheus:2.0.11
 ssh-agent:295.v9ca_a_1c7cc3a_a_
 ssh-slaves:2.854.v7fd446b_337c9

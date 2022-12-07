@@ -45,4 +45,4 @@ timestamper:1.21
 warnings-ng:9.20.1
 workflow-aggregator:590.v6a_d052e5a_a_b_5
 workflow-job:1254.v3f64639b_11dd
-ws-cleanup:0.43
+ws-cleanup:0.44

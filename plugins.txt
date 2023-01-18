@@ -36,7 +36,7 @@ matrix-auth:3.1.6
 oic-auth:2.5
 pipeline-github:2.8-138.d766e30bb08b
 pipeline-graph-view:144.vf3924feb_7e35
-pipeline-stage-view:2.28
+pipeline-stage-view:2.29
 pipeline-utility-steps:2.15.0
 prometheus:2.1.0
 scm-filter-branch-pr:0.5.1

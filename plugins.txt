@@ -30,7 +30,7 @@ jdk-tool:63.v62d2fd4b_4793
 job-dsl:1.81
 ldap:659.v8ca_b_a_fe79fa_d
 lighthouse-report:1.3.0
-lockable-resources:1109.v470b_a_941b_06e
+lockable-resources:1113.vf66761f17f1e
 markdown-formatter:0.2.0
 matrix-auth:3.1.6
 oic-auth:2.5

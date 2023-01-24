@@ -43,7 +43,7 @@ scm-filter-branch-pr:0.5.1
 ssh-agent:295.v9ca_a_1c7cc3a_a_
 ssh-slaves:2.854.v7fd446b_337c9
 timestamper:1.21
-warnings-ng:9.22.0
+warnings-ng:9.23.0
 workflow-aggregator:590.v6a_d052e5a_a_b_5
 workflow-job:1268.v6eb_e2ee1a_85a
 ws-cleanup:0.44

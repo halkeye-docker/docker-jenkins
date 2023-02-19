@@ -5,7 +5,7 @@ basic-branch-build-strategies:71.vc1421f89888e
 bitbucket-pullrequest-builder:1.5.0
 block-queued-job:0.2.0
 checks-api:1.8.1
-cloudbees-bitbucket-branch-source:791.vb_eea_a_476405b
+cloudbees-bitbucket-branch-source:796.v6cb_1559e1673
 cloudbees-disk-usage-simple:178.v1a_4d2f6359a_8
 cloudbees-folder:6.800.v71307ca_b_986b
 configuration-as-code:1569.vb_72405b_80249

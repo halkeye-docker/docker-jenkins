@@ -42,7 +42,7 @@ prometheus:2.1.2
 scm-filter-branch-pr:0.5.1
 ssh-agent:327.v230ecd01f86f
 ssh-slaves:2.877.v365f5eb_a_b_eec
-timestamper:1.22
+timestamper:1.23
 warnings-ng:10.0.3
 workflow-aggregator:596.v8c21c963d92d
 workflow-job:1284.v2fe8ed4573d4

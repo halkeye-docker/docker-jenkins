@@ -33,7 +33,7 @@ lockable-resources:1131.vb_7c3d377e723
 markdown-formatter:61.vce6de46cca_25
 matrix-auth:3.1.6
 oic-auth:2.5
-pipeline-github:2.8-138.d766e30bb08b
+pipeline-github:2.8-141.7e985db66f30
 pipeline-graph-view:175.vb_1a_b_b_cd0fb_86
 pipeline-stage-view:2.32
 pipeline-utility-steps:2.15.1

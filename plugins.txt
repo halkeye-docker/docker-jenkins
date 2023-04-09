@@ -37,7 +37,7 @@ pipeline-github:2.8-141.7e985db66f30
 pipeline-graph-view:183.v9e27732d970f
 pipeline-stage-view:2.32
 pipeline-utility-steps:2.15.1
-prometheus:2.1.2
+prometheus:2.2.0
 scm-filter-branch-pr:0.5.1
 ssh-agent:327.v230ecd01f86f
 ssh-slaves:2.877.v365f5eb_a_b_eec

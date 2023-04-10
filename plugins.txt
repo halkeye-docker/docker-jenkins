@@ -45,7 +45,7 @@ timestamper:1.24
 warnings-ng:10.1.0
 workflow-aggregator:596.v8c21c963d92d
 workflow-job:1289.vd1c337fd5354
-ws-cleanup:0.44
+ws-cleanup:0.45
 
 # implicit plugins that need updating
 javax-mail-api:1.6.2-9

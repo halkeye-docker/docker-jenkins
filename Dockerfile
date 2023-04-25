@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.401-alpine
+FROM jenkins/jenkins:2.402-alpine
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 RUN echo $JENKINS_VERSION > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state

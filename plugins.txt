@@ -38,7 +38,7 @@ pipeline-graph-view:183.v9e27732d970f
 pipeline-stage-view:2.32
 pipeline-utility-steps:2.15.2
 prometheus:2.2.2
-scm-filter-branch-pr:0.5.1
+scm-filter-branch-pr:61.v45f2e5f81fde
 ssh-agent:333.v878b_53c89511
 ssh-slaves:2.877.v365f5eb_a_b_eec
 timestamper:1.24

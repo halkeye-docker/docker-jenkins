@@ -34,7 +34,7 @@ markdown-formatter:77.vf4787624a_796
 matrix-auth:3.1.7
 oic-auth:2.5
 pipeline-github:2.8-141.7e985db66f30
-pipeline-graph-view:183.v9e27732d970f
+pipeline-graph-view:190.vb_6fdf3c1ccfa
 pipeline-stage-view:2.32
 pipeline-utility-steps:2.15.2
 prometheus:2.2.2

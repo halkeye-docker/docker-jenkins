@@ -1,5 +1,5 @@
 ansicolor:1.0.2
-authorize-project:1.5.1
+authorize-project:1.6.0
 badge:1.9.1
 basic-branch-build-strategies:71.vc1421f89888e
 bitbucket-pullrequest-builder:1.5.0

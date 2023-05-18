@@ -44,7 +44,7 @@ ssh-slaves:2.877.v365f5eb_a_b_eec
 timestamper:1.25
 warnings-ng:10.1.0
 workflow-aggregator:596.v8c21c963d92d
-workflow-job:1292.v27d8cc3e2602
+workflow-job:1295.v395eb_7400005
 ws-cleanup:0.45
 
 # implicit plugins that need updating

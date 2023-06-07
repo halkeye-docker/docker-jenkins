@@ -18,7 +18,7 @@ docker-plugin:1.4
 docker-workflow:563.vd5d2e5c4007f
 email-ext:2.97
 favorite:2.4.2
-git:5.0.2
+git:5.1.0
 github-autostatus:3.6.2
 github-branch-source:1725.vd391eef681a_e
 github-checks:545.v79a_a_68b_ca_682

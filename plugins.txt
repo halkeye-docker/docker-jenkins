@@ -31,7 +31,7 @@ job-dsl:1.84
 lighthouse-report:1.3.0
 lockable-resources:1172.v4b_8fc8eed570
 markdown-formatter:95.v17a_965e696ee
-matrix-auth:3.1.8
+matrix-auth:3.1.9
 oic-auth:2.6
 pipeline-github:2.8-141.7e985db66f30
 pipeline-graph-view:191.vc6da_9d3eb_70a

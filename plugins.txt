@@ -36,7 +36,7 @@ oic-auth:2.6
 pipeline-github:2.8-141.7e985db66f30
 pipeline-graph-view:191.vc6da_9d3eb_70a
 pipeline-stage-view:2.33
-pipeline-utility-steps:2.15.4
+pipeline-utility-steps:2.16.0
 prometheus:2.2.3
 scm-filter-branch-pr:77.vf2b_85e1970d5
 ssh-agent:333.v878b_53c89511

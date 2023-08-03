@@ -40,7 +40,7 @@ pipeline-utility-steps:2.16.0
 prometheus:2.2.3
 scm-filter-branch-pr:77.vf2b_85e1970d5
 ssh-agent:333.v878b_53c89511
-ssh-slaves:2.877.v365f5eb_a_b_eec
+ssh-slaves:2.916.vd17b_43357ce4
 timestamper:1.26
 warnings-ng:10.4.0
 workflow-aggregator:596.v8c21c963d92d

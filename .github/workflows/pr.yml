@@ -1,7 +1,9 @@
 name: Build Docker image
 
 on:
-  pull-request:
+  pull_request:
+    types: [opened, reopened]
+    branches: [master, main]
 
 jobs:
   build:

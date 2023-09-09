@@ -36,6 +36,9 @@ jobs:
         uses: docker/metadata-action@79f06a31c0239ef7cd295f017ff96abdf7bbe84d
         with:
           images: halkeye/jenkins
+          tags: |
+            type=sha
+            type=raw,value=latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@0a97817b6ade9f46837855d676c4cca3a2471fc9

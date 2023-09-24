@@ -23,7 +23,7 @@ github-autostatus:3.6.2
 github-branch-source:1741.va_3028eb_9fd21
 github-checks:554.vb_ee03a_000f65
 github-label-filter:1.0.0
-github-scm-trait-notification-context:1.1
+github-scm-trait-notification-context:28.v36632d058d08
 htmlpublisher:1.32
 http_request:1.18
 jdk-tool:73.vddf737284550

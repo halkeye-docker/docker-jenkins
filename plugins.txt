@@ -6,7 +6,7 @@ bitbucket-pullrequest-builder:1.5.0
 block-queued-job:0.2.0
 checks-api:2.0.2
 cloudbees-bitbucket-branch-source:848.v42c6a_317eda_e
-cloudbees-disk-usage-simple:182.v62ca_0c992a_f3
+cloudbees-disk-usage-simple:187.v6378d330d1d4
 cloudbees-folder:6.858.v898218f3609d
 configuration-as-code:1714.v09593e830cfa
 credentials:1293.vff276f713473

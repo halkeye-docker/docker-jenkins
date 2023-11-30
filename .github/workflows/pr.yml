@@ -14,7 +14,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@2a4836ac76fe8f5d0ee3a0d89aa12a80cc552ad3
+        uses: docker/metadata-action@051f7ea71b2d2fbe5b4893e33c4203f4bbbe1293
         with:
           images: halkeye/jenkins
 

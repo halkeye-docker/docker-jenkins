@@ -11,7 +11,7 @@ cloudbees-folder:6.858.v898218f3609d
 configuration-as-code:1752.v0ccc3b_6064b_0
 credentials:1309.v8835d63eb_d8a_
 credentials-binding:642.v737c34dea_6c2
-dark-theme:398.vb_e1e7f1f8a_a_6
+dark-theme:403.v9b_c3e80ceb_f6
 digitalocean-plugin:1.3.1
 discord-notifier:241.v448b_ccd0c0d6
 docker-plugin:1.5

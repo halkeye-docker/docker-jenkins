@@ -20,7 +20,7 @@ email-ext:2.102
 favorite:2.208.v91d65b_7792a_c
 git:5.2.1
 github-autostatus:3.6.2
-github-branch-source:1752.vc201a_0235d80
+github-branch-source:1755.vcdb_d136f3b_25
 github-checks:554.vb_ee03a_000f65
 github-label-filter:1.0.0
 github-scm-trait-notification-context:40.vfa_7f31a_b_d7f8

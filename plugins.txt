@@ -29,7 +29,7 @@ http_request:1.18
 jdk-tool:73.vddf737284550
 job-dsl:1.87
 lighthouse-report:1.3.0
-lockable-resources:1222.v3d55a_36d63e4
+lockable-resources:1224.v5e9500f98269
 markdown-formatter:95.v17a_965e696ee
 matrix-auth:3.2.1
 oic-auth:2.6

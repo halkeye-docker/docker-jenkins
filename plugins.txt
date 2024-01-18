@@ -8,7 +8,7 @@ checks-api:2.0.2
 cloudbees-bitbucket-branch-source:866.vdea_7dcd3008e
 cloudbees-disk-usage-simple:203.v3f46a_7462b_1a_
 cloudbees-folder:6.858.v898218f3609d
-configuration-as-code:1763.vb_fe9c1b_83f7b
+configuration-as-code:1775.v810dc950b_514
 credentials:1311.vcf0a_900b_37c2
 credentials-binding:642.v737c34dea_6c2
 dark-theme:416.v535839b_c4e88

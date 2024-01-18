@@ -49,4 +49,4 @@ ws-cleanup:0.45
 
 # implicit plugins that need updating
 javax-mail-api:1.6.2-9
-sshd:3.312.v1c601b_c83b_0e
+sshd:3.322.v159e91f6a_550

@@ -19,7 +19,7 @@ jobs:
           images: halkeye/jenkins
 
       - name: Build Docker image
-        uses: docker/build-push-action@9f6f8c940b91232557f8699b21341a08624a8dce
+        uses: docker/build-push-action@94d76d3bc1409736cb5dc1ada9502bec3a72973c
         with:
           context: .
           file: ./Dockerfile
